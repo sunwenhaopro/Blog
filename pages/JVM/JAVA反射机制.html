@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>JAVA反射机制 | CtrlCVer</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <link rel="icon" href="/6.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <meta name="description" content="孙文豪大魔王">
+    
+    <link rel="preload" href="/assets/css/0.styles.688e7b51.css" as="style"><link rel="preload" href="/assets/js/app.090a2d6d.js" as="script"><link rel="preload" href="/assets/js/2.cf1cc9d0.js" as="script"><link rel="preload" href="/assets/js/13.4c7ffc8f.js" as="script"><link rel="prefetch" href="/assets/js/10.1acf2cf5.js"><link rel="prefetch" href="/assets/js/11.916bd407.js"><link rel="prefetch" href="/assets/js/12.d4764c77.js"><link rel="prefetch" href="/assets/js/14.9b1e93c0.js"><link rel="prefetch" href="/assets/js/15.ed908bfd.js"><link rel="prefetch" href="/assets/js/16.f0385ef6.js"><link rel="prefetch" href="/assets/js/17.8590f7d9.js"><link rel="prefetch" href="/assets/js/18.e81d9f69.js"><link rel="prefetch" href="/assets/js/19.30d3132d.js"><link rel="prefetch" href="/assets/js/20.26d77569.js"><link rel="prefetch" href="/assets/js/21.9801f8dc.js"><link rel="prefetch" href="/assets/js/22.1ab408ef.js"><link rel="prefetch" href="/assets/js/23.4185e811.js"><link rel="prefetch" href="/assets/js/24.c8717881.js"><link rel="prefetch" href="/assets/js/25.ae9ccce4.js"><link rel="prefetch" href="/assets/js/26.0d7caa52.js"><link rel="prefetch" href="/assets/js/27.6241fe96.js"><link rel="prefetch" href="/assets/js/28.202edb24.js"><link rel="prefetch" href="/assets/js/29.3cafeb4e.js"><link rel="prefetch" href="/assets/js/3.7d9f72a4.js"><link rel="prefetch" href="/assets/js/30.f7f0c55c.js"><link rel="prefetch" href="/assets/js/31.85d98bbe.js"><link rel="prefetch" href="/assets/js/32.cbacafbd.js"><link rel="prefetch" href="/assets/js/33.988aa58d.js"><link rel="prefetch" href="/assets/js/34.d4c01595.js"><link rel="prefetch" href="/assets/js/35.b81c4294.js"><link rel="prefetch" href="/assets/js/36.36383d8c.js"><link rel="prefetch" href="/assets/js/37.98ca69aa.js"><link rel="prefetch" href="/assets/js/38.7964a6d0.js"><link rel="prefetch" href="/assets/js/39.25ab8983.js"><link rel="prefetch" href="/assets/js/4.aa32c119.js"><link rel="prefetch" href="/assets/js/40.6298ffd4.js"><link rel="prefetch" href="/assets/js/41.cb3ca264.js"><link rel="prefetch" href="/assets/js/42.10a52abf.js"><link rel="prefetch" href="/assets/js/43.b561214c.js"><link rel="prefetch" href="/assets/js/44.80ee1f94.js"><link rel="prefetch" href="/assets/js/45.f9cbe66c.js"><link rel="prefetch" href="/assets/js/46.bf9e8c2d.js"><link rel="prefetch" href="/assets/js/47.2e42681b.js"><link rel="prefetch" href="/assets/js/48.c7de4200.js"><link rel="prefetch" href="/assets/js/49.aac7d625.js"><link rel="prefetch" href="/assets/js/5.44f377f3.js"><link rel="prefetch" href="/assets/js/50.263c6574.js"><link rel="prefetch" href="/assets/js/51.7b216a64.js"><link rel="prefetch" href="/assets/js/52.32c2c6b6.js"><link rel="prefetch" href="/assets/js/53.76741f71.js"><link rel="prefetch" href="/assets/js/54.d40dd513.js"><link rel="prefetch" href="/assets/js/55.b8472a52.js"><link rel="prefetch" href="/assets/js/56.70e30030.js"><link rel="prefetch" href="/assets/js/57.05e5bce6.js"><link rel="prefetch" href="/assets/js/58.bced5ca1.js"><link rel="prefetch" href="/assets/js/59.0afe9a10.js"><link rel="prefetch" href="/assets/js/6.c17ba07d.js"><link rel="prefetch" href="/assets/js/60.4a251428.js"><link rel="prefetch" href="/assets/js/61.16f714c5.js"><link rel="prefetch" href="/assets/js/62.54178f3f.js"><link rel="prefetch" href="/assets/js/63.ea353428.js"><link rel="prefetch" href="/assets/js/64.5fa3e033.js"><link rel="prefetch" href="/assets/js/65.c943fc85.js"><link rel="prefetch" href="/assets/js/66.c976beae.js"><link rel="prefetch" href="/assets/js/67.d12c057d.js"><link rel="prefetch" href="/assets/js/68.b825a20a.js"><link rel="prefetch" href="/assets/js/69.1955d09d.js"><link rel="prefetch" href="/assets/js/7.1165067c.js"><link rel="prefetch" href="/assets/js/70.5ba0878f.js"><link rel="prefetch" href="/assets/js/8.267ff3e9.js"><link rel="prefetch" href="/assets/js/9.341459e9.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.688e7b51.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/2.png" alt="CtrlCVer" class="logo"> <span class="site-name can-hide">CtrlCVer</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="数据库" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="数据库" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/数据库/JAVA反射机制.html" class="nav-link">
+  JAVA反射机制
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Vue" class="dropdown-title"><span class="title">Vue</span> <span class="arrow down"></span></button> <button type="button" aria-label="Vue" class="mobile-dropdown-title"><span class="title">Vue</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/Vue/Vue-loading动态加载.html" class="nav-link">
+  Vue-loading动态加载
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Vue/Vue项目用axios做request封装.html" class="nav-link">
+  Vue项目用axios做request封装
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Vue/前端踩坑之路.html" class="nav-link">
+  前端踩坑之路
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringBoot" class="dropdown-title"><span class="title">SpringBoot</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringBoot" class="mobile-dropdown-title"><span class="title">SpringBoot</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/aop面向切面编程.html" class="nav-link">
+  aop面向切面编程
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Cron表达式.html" class="nav-link">
+  Cron表达式
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/issue3.html" class="nav-link">
+  issue3
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Listener监听器.html" class="nav-link">
+  Listener监听器
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Mybatis 动态SQL.html" class="nav-link">
+  Mybatis 动态SQL
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Mybatis.html" class="nav-link">
+  Mybatis
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/mybatis和spring整合.html" class="nav-link">
+  mybatis和spring整合
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Mybatis缓存机制.html" class="nav-link">
+  Mybatis缓存机制
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/session之 HttpSessionActivation.html" class="nav-link">
+  session之 HttpSessionActivation
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/springboot+vue部署后出现springboot后端部分页面404.html" class="nav-link">
+  springboot+vue部署后出现springboot后端部分页面404
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/springboot.html" class="nav-link">
+  springboot
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/SpringMVC介绍.html" class="nav-link">
+  SpringMVC介绍
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/springmvc重定向和请求转发操作.html" class="nav-link">
+  springmvc重定向和请求转发操作
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Spring介绍.html" class="nav-link">
+  Spring介绍
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/SSM整合开发.html" class="nav-link">
+  SSM整合开发
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/url-pattern设置.html" class="nav-link">
+  url-pattern设置
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/web开发.html" class="nav-link">
+  web开发
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/yaml.html" class="nav-link">
+  yaml
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/单元测试.html" class="nav-link">
+  单元测试
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/启动原理.html" class="nav-link">
+  启动原理
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/嵌入式servlet服务器.html" class="nav-link">
+  嵌入式servlet服务器
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/异常，拦截器....html" class="nav-link">
+  异常，拦截器...
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/执行流程分析.html" class="nav-link">
+  执行流程分析
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/指标监控.html" class="nav-link">
+  指标监控
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/数据访问.html" class="nav-link">
+  数据访问
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/注意.html" class="nav-link">
+  注意
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/注解.html" class="nav-link">
+  注解
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/注解方式注入.html" class="nav-link">
+  注解方式注入
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/源码分析.html" class="nav-link">
+  源码分析
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/高级特性.html" class="nav-link">
+  高级特性
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringSecurity" class="dropdown-title"><span class="title">SpringSecurity</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringSecurity" class="mobile-dropdown-title"><span class="title">SpringSecurity</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/SpringSecurity/前后端分离Header中添加Authorization的设置.html" class="nav-link">
+  前后端分离Header中添加Authorization的设置
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringSecurity/基本解读.html" class="nav-link">
+  基本解读
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringSecurity/基本配置.html" class="nav-link">
+  基本配置
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringCloud" class="dropdown-title"><span class="title">SpringCloud</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringCloud" class="mobile-dropdown-title"><span class="title">SpringCloud</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Eureka.html" class="nav-link">
+  Eureka
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Gateway.html" class="nav-link">
+  Gateway
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Hystrix断路器.html" class="nav-link">
+  Hystrix断路器
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/nacos-config.html" class="nav-link">
+  nacos-config
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/nacos.html" class="nav-link">
+  nacos
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/nacos集群和持久化配置.html" class="nav-link">
+  nacos集群和持久化配置
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/OpenFeign ISsue.html" class="nav-link">
+  OpenFeign ISsue
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/OpenFeign-issue.html" class="nav-link">
+  OpenFeign-issue
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/OpenFeign服务接口调用.html" class="nav-link">
+  OpenFeign服务接口调用
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/question.html" class="nav-link">
+  question
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/seata.html" class="nav-link">
+  seata
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/security.html" class="nav-link">
+  security
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/sentinel.html" class="nav-link">
+  sentinel
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Sentinel实现熔断与限流.html" class="nav-link">
+  Sentinel实现熔断与限流
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Spring Cloud Ribbon.html" class="nav-link">
+  Spring Cloud Ribbon
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/spring-cloud-stream.html" class="nav-link">
+  spring-cloud-stream
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/stream3.2学习.html" class="nav-link">
+  stream3.2学习
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/zookeeper.html" class="nav-link">
+  zookeeper
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/配置中心.html" class="nav-link">
+  配置中心
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="JVM" class="dropdown-title"><span class="title">JVM</span> <span class="arrow down"></span></button> <button type="button" aria-label="JVM" class="mobile-dropdown-title"><span class="title">JVM</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/JVM/JAVA反射机制.html" class="nav-link">
+  JAVA反射机制
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Project" class="dropdown-title"><span class="title">Project</span> <span class="arrow down"></span></button> <button type="button" aria-label="Project" class="mobile-dropdown-title"><span class="title">Project</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/Project/clash部署至服务器，提供“上网”服务.html" class="nav-link">
+  clash部署至服务器，提供“上网”服务
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Project/Unicloud 阿里云服务器作图床.html" class="nav-link">
+  Unicloud 阿里云服务器作图床
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Project/内网穿透技术初探.html" class="nav-link">
+  内网穿透技术初探
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Project/微信订阅号开发.html" class="nav-link">
+  微信订阅号开发
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="机器视觉" class="dropdown-title"><span class="title">机器视觉</span> <span class="arrow down"></span></button> <button type="button" aria-label="机器视觉" class="mobile-dropdown-title"><span class="title">机器视觉</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/机器视觉/RTMPose.html" class="nav-link">
+  RTMPose
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="面试题" class="dropdown-title"><span class="title">面试题</span> <span class="arrow down"></span></button> <button type="button" aria-label="面试题" class="mobile-dropdown-title"><span class="title">面试题</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/面试题/Redis.html" class="nav-link">
+  Redis
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/sunwenhaopro" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://www.ctrlcver.icu" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  博客
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://photowall.ctrlcver.icu" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  PhotoWall
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="数据库" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="数据库" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/数据库/JAVA反射机制.html" class="nav-link">
+  JAVA反射机制
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Vue" class="dropdown-title"><span class="title">Vue</span> <span class="arrow down"></span></button> <button type="button" aria-label="Vue" class="mobile-dropdown-title"><span class="title">Vue</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/Vue/Vue-loading动态加载.html" class="nav-link">
+  Vue-loading动态加载
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Vue/Vue项目用axios做request封装.html" class="nav-link">
+  Vue项目用axios做request封装
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Vue/前端踩坑之路.html" class="nav-link">
+  前端踩坑之路
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringBoot" class="dropdown-title"><span class="title">SpringBoot</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringBoot" class="mobile-dropdown-title"><span class="title">SpringBoot</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/aop面向切面编程.html" class="nav-link">
+  aop面向切面编程
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Cron表达式.html" class="nav-link">
+  Cron表达式
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/issue3.html" class="nav-link">
+  issue3
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Listener监听器.html" class="nav-link">
+  Listener监听器
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Mybatis 动态SQL.html" class="nav-link">
+  Mybatis 动态SQL
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Mybatis.html" class="nav-link">
+  Mybatis
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/mybatis和spring整合.html" class="nav-link">
+  mybatis和spring整合
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Mybatis缓存机制.html" class="nav-link">
+  Mybatis缓存机制
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/session之 HttpSessionActivation.html" class="nav-link">
+  session之 HttpSessionActivation
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/springboot+vue部署后出现springboot后端部分页面404.html" class="nav-link">
+  springboot+vue部署后出现springboot后端部分页面404
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/springboot.html" class="nav-link">
+  springboot
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/SpringMVC介绍.html" class="nav-link">
+  SpringMVC介绍
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/springmvc重定向和请求转发操作.html" class="nav-link">
+  springmvc重定向和请求转发操作
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Spring介绍.html" class="nav-link">
+  Spring介绍
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/SSM整合开发.html" class="nav-link">
+  SSM整合开发
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/url-pattern设置.html" class="nav-link">
+  url-pattern设置
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/web开发.html" class="nav-link">
+  web开发
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/yaml.html" class="nav-link">
+  yaml
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/单元测试.html" class="nav-link">
+  单元测试
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/启动原理.html" class="nav-link">
+  启动原理
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/嵌入式servlet服务器.html" class="nav-link">
+  嵌入式servlet服务器
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/异常，拦截器....html" class="nav-link">
+  异常，拦截器...
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/执行流程分析.html" class="nav-link">
+  执行流程分析
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/指标监控.html" class="nav-link">
+  指标监控
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/数据访问.html" class="nav-link">
+  数据访问
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/注意.html" class="nav-link">
+  注意
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/注解.html" class="nav-link">
+  注解
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/注解方式注入.html" class="nav-link">
+  注解方式注入
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/源码分析.html" class="nav-link">
+  源码分析
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/高级特性.html" class="nav-link">
+  高级特性
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringSecurity" class="dropdown-title"><span class="title">SpringSecurity</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringSecurity" class="mobile-dropdown-title"><span class="title">SpringSecurity</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/SpringSecurity/前后端分离Header中添加Authorization的设置.html" class="nav-link">
+  前后端分离Header中添加Authorization的设置
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringSecurity/基本解读.html" class="nav-link">
+  基本解读
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringSecurity/基本配置.html" class="nav-link">
+  基本配置
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringCloud" class="dropdown-title"><span class="title">SpringCloud</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringCloud" class="mobile-dropdown-title"><span class="title">SpringCloud</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Eureka.html" class="nav-link">
+  Eureka
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Gateway.html" class="nav-link">
+  Gateway
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Hystrix断路器.html" class="nav-link">
+  Hystrix断路器
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/nacos-config.html" class="nav-link">
+  nacos-config
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/nacos.html" class="nav-link">
+  nacos
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/nacos集群和持久化配置.html" class="nav-link">
+  nacos集群和持久化配置
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/OpenFeign ISsue.html" class="nav-link">
+  OpenFeign ISsue
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/OpenFeign-issue.html" class="nav-link">
+  OpenFeign-issue
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/OpenFeign服务接口调用.html" class="nav-link">
+  OpenFeign服务接口调用
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/question.html" class="nav-link">
+  question
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/seata.html" class="nav-link">
+  seata
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/security.html" class="nav-link">
+  security
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/sentinel.html" class="nav-link">
+  sentinel
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Sentinel实现熔断与限流.html" class="nav-link">
+  Sentinel实现熔断与限流
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Spring Cloud Ribbon.html" class="nav-link">
+  Spring Cloud Ribbon
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/spring-cloud-stream.html" class="nav-link">
+  spring-cloud-stream
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/stream3.2学习.html" class="nav-link">
+  stream3.2学习
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/zookeeper.html" class="nav-link">
+  zookeeper
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/配置中心.html" class="nav-link">
+  配置中心
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="JVM" class="dropdown-title"><span class="title">JVM</span> <span class="arrow down"></span></button> <button type="button" aria-label="JVM" class="mobile-dropdown-title"><span class="title">JVM</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/JVM/JAVA反射机制.html" class="nav-link">
+  JAVA反射机制
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Project" class="dropdown-title"><span class="title">Project</span> <span class="arrow down"></span></button> <button type="button" aria-label="Project" class="mobile-dropdown-title"><span class="title">Project</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/Project/clash部署至服务器，提供“上网”服务.html" class="nav-link">
+  clash部署至服务器，提供“上网”服务
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Project/Unicloud 阿里云服务器作图床.html" class="nav-link">
+  Unicloud 阿里云服务器作图床
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Project/内网穿透技术初探.html" class="nav-link">
+  内网穿透技术初探
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Project/微信订阅号开发.html" class="nav-link">
+  微信订阅号开发
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="机器视觉" class="dropdown-title"><span class="title">机器视觉</span> <span class="arrow down"></span></button> <button type="button" aria-label="机器视觉" class="mobile-dropdown-title"><span class="title">机器视觉</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/机器视觉/RTMPose.html" class="nav-link">
+  RTMPose
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="面试题" class="dropdown-title"><span class="title">面试题</span> <span class="arrow down"></span></button> <button type="button" aria-label="面试题" class="mobile-dropdown-title"><span class="title">面试题</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/面试题/Redis.html" class="nav-link">
+  Redis
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/sunwenhaopro" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://www.ctrlcver.icu" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  博客
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://photowall.ctrlcver.icu" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  PhotoWall
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/pages/JVM/JAVA反射机制.html" class="active sidebar-link">JAVA反射机制</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/pages/JVM/JAVA反射机制.html#反射机制是什么" class="sidebar-link">反射机制是什么</a></li><li class="sidebar-sub-header"><a href="/pages/JVM/JAVA反射机制.html#反射的应用场合" class="sidebar-link">反射的应用场合</a></li><li class="sidebar-sub-header"><a href="/pages/JVM/JAVA反射机制.html#反射的原理" class="sidebar-link">反射的原理</a></li><li class="sidebar-sub-header"><a href="/pages/JVM/JAVA反射机制.html#反射机制的优缺点" class="sidebar-link">反射机制的优缺点</a></li><li class="sidebar-sub-header"><a href="/pages/JVM/JAVA反射机制.html#反射机制常用的类文件" class="sidebar-link">反射机制常用的类文件：</a></li><li class="sidebar-sub-header"><a href="/pages/JVM/JAVA反射机制.html#反射的入口-class类" class="sidebar-link">反射的入口—Class类</a></li><li class="sidebar-sub-header"><a href="/pages/JVM/JAVA反射机制.html#代码演示-认知class类" class="sidebar-link">代码演示：认知Class类</a></li><li class="sidebar-sub-header"><a href="/pages/JVM/JAVA反射机制.html#class类的常用方法" class="sidebar-link">Class类的常用方法：</a></li><li class="sidebar-sub-header"><a href="/pages/JVM/JAVA反射机制.html#获取一个类的类对象的三种方式" class="sidebar-link">获取一个类的类对象的三种方式：</a></li><li class="sidebar-sub-header"><a href="/pages/JVM/JAVA反射机制.html#使用反射创建对象" class="sidebar-link">使用反射创建对象</a></li><li class="sidebar-sub-header"><a href="/pages/JVM/JAVA反射机制.html#使用反射操作属性" class="sidebar-link">使用反射操作属性</a></li><li class="sidebar-sub-header"><a href="/pages/JVM/JAVA反射机制.html#使用反射执行方法" class="sidebar-link">使用反射执行方法</a></li></ul></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="java反射机制"><a href="#java反射机制" class="header-anchor">#</a> JAVA反射机制</h1> <h2 id="反射机制是什么"><a href="#反射机制是什么" class="header-anchor">#</a> 反射机制是什么</h2> <blockquote><p>1、Java反射机制的核心是在程序运行时动态加载类并获取类的详细信息，从而操作类或对象的属性和方法。本质是JVM得到class对象之后，<strong>再通过class对象进行反编译，从而获取对象的各种信息。</strong>
+2、Java属于先编译再运行的语言，程序中对象的类型在编译期就确定下来了，而当程序在运行时可能需要动态加载某些类，这些类因为之前用不到，所以没有被加载到JVM。通过反射，可以在运行时动态地创建对象并调用其属性，<strong>不需要提前在编译期知道运行的对象是谁。</strong></p></blockquote> <p><strong>白话理解一下反射：</strong></p> <ul><li>我们编译时知道类或对象的具体信息，此时直接对类和对象进行操作即可，无需使用反射（reflection）</li> <li>如果编译不知道类或对象的具体信息，此时应该如何做呢？这时就要用到 <strong>反射</strong> 来实现。比如类的名称放在XML文件中，属性和属性值放在XML文件中，需要在运行时读取XML文件，动态获取类的信息</li></ul> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">{</span>
+<span class="token comment">//编码/编译的时候，已经知道要创建哪个类的对象，此时和反射没关系</span>
+        <span class="token comment">//创建对象</span>
+        <span class="token comment">//Animal an = new Dog();</span>
+        <span class="token class-name">Animal</span> an <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//操作属性</span>
+        an<span class="token punctuation">.</span>nickName <span class="token operator">=</span><span class="token string">&quot;旺财&quot;</span><span class="token punctuation">;</span>        an<span class="token punctuation">.</span>color <span class="token operator">=</span> <span class="token string">&quot;黑色&quot;</span><span class="token punctuation">;</span>
+        <span class="token comment">//执行方法</span>
+        an<span class="token punctuation">.</span><span class="token function">shout</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        an<span class="token punctuation">.</span><span class="token function">shout</span><span class="token punctuation">(</span><span class="token string">&quot;门口&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        an<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>an<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//编码/编译的时候，不知道要创建哪个类的对象，只有根据运//行时动态获取的内容来创建对象</span>
+   <span class="token comment">//使用Properties类读取属性文件，最终得到了类的完整路径字符串</span>
+        <span class="token class-name">String</span> className <span class="token operator">=</span> <span class="token string">&quot;com.bjsxt.why.Cat&quot;</span><span class="token punctuation">;</span>
+        <span class="token comment">//创建对象</span>
+        <span class="token comment">//Animal an2 = new &quot;com.bjsxt.why.Cat&quot;();</span>
+        <span class="token class-name">Class</span> clazz <span class="token operator">=</span> <span class="token class-name">Class</span><span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span>className<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Object</span> an2 <span class="token operator">=</span> clazz<span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//操作属性</span>
+        <span class="token comment">//执行方法</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br></div></div><h2 id="反射的应用场合"><a href="#反射的应用场合" class="header-anchor">#</a> 反射的应用场合</h2> <ul><li>在编译时根本无法知道该对象或类可能属于哪些类，程序只依靠运行时信息来发现该对象和类的真实信息</li> <li>比如：<strong>log4j，Servlet、SSM框架技术</strong>都用到了<strong>反射机制</strong></li></ul> <div class="language-java line-numbers-mode"><pre class="language-java"><code>比如：log4j
+   log4j<span class="token punctuation">.</span>appender<span class="token punctuation">.</span>stdout<span class="token operator">=</span><span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>apache<span class="token punctuation">.</span>log4j<span class="token punctuation">.</span></span>ConsoleAppender</span>
+   log4j<span class="token punctuation">.</span>appender<span class="token punctuation">.</span>logfile<span class="token punctuation">.</span>layout<span class="token operator">=</span><span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>apache<span class="token punctuation">.</span>log4j<span class="token punctuation">.</span></span>PatternLayout</span>
+ 比如：<span class="token class-name">Servlet</span>
+  <span class="token generics"><span class="token punctuation">&lt;</span>servlet<span class="token punctuation">&gt;</span></span>
+        <span class="token operator">&lt;</span>servlet<span class="token operator">-</span>name<span class="token operator">&gt;</span><span class="token class-name">HelloServlet</span><span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span>name<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>servlet<span class="token operator">-</span><span class="token keyword">class</span><span class="token operator">&gt;</span><span class="token class-name"><span class="token namespace">servlet<span class="token punctuation">.</span></span>HelloServlet</span><span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span><span class="token keyword">class</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">&gt;</span>
+ 比如 <span class="token constant">SSM</span>
+  <span class="token operator">&lt;</span>bean id<span class="token operator">=</span><span class="token string">&quot;tm&quot;</span>  
+  <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;org..jdbc.datasource.DataSourceTransactionManager&quot;</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">&quot;dataSource&quot;</span> ref<span class="token operator">=</span><span class="token string">&quot;dataSource&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+   <span class="token operator">&lt;</span><span class="token operator">/</span>bean<span class="token operator">&gt;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h2 id="反射的原理"><a href="#反射的原理" class="header-anchor">#</a> 反射的原理</h2> <p>下图是类的正常加载过程、反射原理与class对象：</p> <p>Class对象的由来是将.class文件读入内存，并为之创建一个Class对象。</p> <p><img src="https://pic2.zhimg.com/80/v2-12ed9f48c94e5e2a3c63b2ed9bc964b9_720w.webp" alt=""></p> <h2 id="反射机制的优缺点"><a href="#反射机制的优缺点" class="header-anchor">#</a> 反射机制的优缺点</h2> <p><strong>1、优点：</strong></p> <p>在运行时获得类的各种内容，进行反编译，对于Java这种先编译再运行的语言，能够让我们很方便的创建灵活的代码，这些代码可以在运行时装配，无需在组件之间进行源代码的链接，更加容易实现面向对象。</p> <p><strong>2、缺点：</strong></p> <p>（1）反射会消耗一定的系统资源，因此，如果不需要动态地创建一个对象，那么就不需要用反射；</p> <p>（2）反射调用方法时可以忽略权限检查，因此可能会破坏封装性而导致安全问题。</p> <h2 id="反射机制常用的类文件"><a href="#反射机制常用的类文件" class="header-anchor">#</a> 反射机制常用的类文件：</h2> <ul><li>Java.lang.Class;</li> <li>Java.lang.reflect.Constructor;</li> <li>Java.lang.reflect.Field;</li> <li>Java.lang.reflect.Method;</li> <li>Java.lang.reflect.Modifier;</li></ul> <p><strong>反射的作用</strong></p> <ul><li><ul><li>动态创建对象</li> <li>动态操作属性</li> <li>动态调用方法</li></ul></li></ul> <p>在JDK中，主要由以下类来实现Java反射机制，<strong>这些类都位于java.lang.reflect包中</strong></p> <ul><li><ul><li>Class类：代表一个类</li> <li>Constructor 类：代表类的构造方法</li> <li>Field 类：代表类的成员变量(属性)</li> <li>Method类：代表类的成员方法</li></ul></li></ul> <h2 id="反射的入口-class类"><a href="#反射的入口-class类" class="header-anchor">#</a> 反射的入口—Class类</h2> <p><strong>-Class类是Java 反射机制的起源和入口</strong></p> <ul><li>用于获取与类相关的各种信息</li> <li>提供了获取类信息的相关方法</li> <li>Class类继承自Object类</li></ul> <p><strong>-Class类是所有类的共同的图纸</strong></p> <ul><li>每个类有自己的对象，好比图纸和实物的关系</li> <li>每个类也可看做是一个对象，有共同的图纸Class，存放类的结构信息，比如类的名字、属性、方法、构造方法、父类和接口，能够通过相应方法取出相应信息</li></ul> <p><strong>-Class类的对象称为类对象</strong></p> <p><img src="https://pic3.zhimg.com/80/v2-6ee665ccfc20b55900cc4726195be0e6_720w.webp" alt="img"></p> <h2 id="代码演示-认知class类"><a href="#代码演示-认知class类" class="header-anchor">#</a> 代码演示：认知Class类</h2> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestClass1</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">{</span>
+        <span class="token comment">//1.获取一个类的结构信息（类对象 Class对象）</span>
+        <span class="token class-name">Class</span> clazz <span class="token operator">=</span> <span class="token class-name">Class</span><span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token string">&quot;com.bjsxt.why.Dog&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//2.从类对象中获取类的各种结构信息</span>
+        <span class="token comment">//2.1 获取基本结构信息</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>clazz<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>clazz<span class="token punctuation">.</span><span class="token function">getSimpleName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>clazz<span class="token punctuation">.</span><span class="token function">getSuperclass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span>clazz<span class="token punctuation">.</span><span class="token function">getInterfaces</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//2.2 获取构造方法</span>
+        <span class="token comment">//只能得到public修饰的构造方法</span>
+        <span class="token comment">//Constructor[] constructors = clazz.getConstructors();</span>
+        <span class="token comment">//可以得到所有的构造方法</span>
+        <span class="token class-name">Constructor</span><span class="token punctuation">[</span><span class="token punctuation">]</span> constructors <span class="token operator">=</span> clazz<span class="token punctuation">.</span><span class="token function">getDeclaredConstructors</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>constructors<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token class-name">Constructor</span> con <span class="token operator">:</span>constructors<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">//System.out.println(con.toString());</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>con<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">&quot;||&quot;</span> <span class="token operator">+</span> 
+                    <span class="token class-name">Modifier</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span>con<span class="token punctuation">.</span><span class="token function">getModifiers</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">&quot;  ||&quot;</span>
+                    <span class="token operator">+</span> <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span>con<span class="token punctuation">.</span><span class="token function">getParameterTypes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">//Constructor con = clazz.getConstructor();//获取无参数构造方法</span>
+      <span class="token comment">//Constructor con = clazz.getConstructor(String.class,String.class);</span>
+        <span class="token class-name">Constructor</span> con <span class="token operator">=</span> 
+clazz<span class="token punctuation">.</span><span class="token function">getDeclaredConstructor</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span><span class="token class-name">String</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>con<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//2.3 获取属性</span>
+       <span class="token comment">//Field[] fields = clazz.getFields();</span>
+        <span class="token class-name">Field</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> fields <span class="token operator">=</span> clazz<span class="token punctuation">.</span><span class="token function">getDeclaredFields</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>fields<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token class-name">Field</span> f <span class="token operator">:</span>fields<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">//Field f = clazz.getField(&quot;color&quot;);</span>
+        <span class="token comment">//private 默认 protecte public都可以获取，但不包括父类的</span>
+        <span class="token class-name">Field</span> f <span class="token operator">=</span> clazz<span class="token punctuation">.</span><span class="token function">getDeclaredField</span><span class="token punctuation">(</span><span class="token string">&quot;age&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//2.3 获取方法</span>
+       <span class="token comment">//Method[] methods = clazz.getMethods();</span>
+        <span class="token class-name">Method</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> methods <span class="token operator">=</span> clazz<span class="token punctuation">.</span><span class="token function">getDeclaredMethods</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token class-name">Method</span> m <span class="token operator">:</span> methods<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">//Method m = clazz.getMethod(&quot;shout&quot;,String.class);</span>
+        <span class="token comment">//Method m = clazz.getMethod(&quot;run&quot;);//public</span>
+        <span class="token class-name">Method</span> m <span class="token operator">=</span> clazz<span class="token punctuation">.</span><span class="token function">getDeclaredMethod</span><span class="token punctuation">(</span><span class="token string">&quot;run&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br></div></div><h2 id="class类的常用方法"><a href="#class类的常用方法" class="header-anchor">#</a> <strong>Class类的常用方法：</strong></h2> <p><strong>getFields()——</strong> 获得类的public类型的属性。</p> <p><strong>getDeclaredFields()——</strong> 获得类的所有属性</p> <p><strong>getField(String name)——</strong> 获得类的指定属性</p> <p><strong>getMethods()——</strong> 获得类的public类型的方法</p> <p><strong>getMethod (String name,Class [] args)——</strong> 获得类的指定方法</p> <p><strong>getConstrutors()——</strong> 获得类的public类型的构造方法</p> <p><strong>getConstrutor(Class[] args)——</strong> 获得类的特定构造方法</p> <p><strong>newInstance()——</strong> 通过类的无参构造方法创建对象</p> <p><strong>getName()——</strong> 获得类的完整名字</p> <p><strong>getPackage()——</strong> 获取此类所属的包</p> <p><strong>getSuperclass()——</strong> 获得此类的父类对应的Class对象</p> <h2 id="获取一个类的类对象的三种方式"><a href="#获取一个类的类对象的三种方式" class="header-anchor">#</a> 获取一个类的类对象的三种方式：</h2> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestClass2</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span>  <span class="token class-name">Exception</span> <span class="token punctuation">{</span>
+        <span class="token comment">//1.获取一个类的结构信息（类对象 Class对象）</span>
+        <span class="token comment">// 1.1Class.forName(类的完整路径字符串);</span>
+        <span class="token comment">//Class clazz = Class.forName(&quot;java.lang.String&quot;);</span>
+        <span class="token comment">//1.2 类名.class</span>
+       <span class="token comment">// Class clazz = String.class;</span>
+        <span class="token comment">//1.3 对象名.getClass()</span>
+        <span class="token class-name">String</span> str <span class="token operator">=</span> <span class="token string">&quot;bjsxt&quot;</span><span class="token punctuation">;</span>
+        <span class="token class-name">Class</span> clazz <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//Integer in = new Integer(20);</span>
+        <span class="token comment">//2.从类对象中获取类的各种结构信息</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>clazz<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>clazz<span class="token punctuation">.</span><span class="token function">getSimpleName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>clazz<span class="token punctuation">.</span><span class="token function">getSuperclass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span>clazz<span class="token punctuation">.</span><span class="token function">getInterfaces</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><p><strong>其中类名.class、对象名.getClass()方式在编码时已经知道了要操作的类</strong>，而Class.forName()方式在操作的时候，可以知道，也可以不知道要操作的类。所以当编码时还不知道要操作的具体类，就只能使用Class.forName()方式了。</p> <h2 id="使用反射创建对象"><a href="#使用反射创建对象" class="header-anchor">#</a> 使用反射创建对象</h2> <p><strong>调用无参数构造方法创建对象</strong></p> <p><strong>方法1：通过Class的newInstance()方法</strong></p> <ul><li>该方法要求该Class对象的对应类有无参构造方法</li> <li>执行newInstance()实际上就是执行无参构造方法来创建该类的实例</li></ul> <p><strong>方法2：通过Constructor的newInstance()方法</strong></p> <ul><li>先使用Class对象获取指定的Constructor对象</li> <li>再调用Constructor对象的newInstance()创建Class对象对应类的对象</li> <li>通过该方法可选择使用指定构造方法来创建对象</li></ul> <p><strong>代码示例：通过Class的newInstance()方法</strong></p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestConstructor1</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span><span class="token punctuation">{</span>
+        <span class="token comment">//不使用反射创建对象</span>
+        <span class="token comment">//Dog dog = new Dog();</span>
+        <span class="token comment">//使用反射创建对象</span>
+        <span class="token comment">//1.获取类的完整路径字符串</span>
+        <span class="token class-name">String</span> className <span class="token operator">=</span> <span class="token string">&quot;com.bjsxt.why.Dog&quot;</span><span class="token punctuation">;</span>
+        <span class="token comment">//2.根据完整路径字符串获取Class对象信息</span>
+        <span class="token class-name">Class</span> clazz <span class="token operator">=</span> <span class="token class-name">Class</span><span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span>className<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//3.直接使用Class的方法创建对象</span>
+        <span class="token class-name">Object</span> obj <span class="token operator">=</span> clazz<span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p><strong>代码示例：通过Constructor的newInstance()方法创建对象</strong></p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestConstructor2</span>  <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span><span class="token punctuation">{</span>
+        <span class="token comment">//不使用反射创建对象</span>
+        <span class="token comment">//Dog dog = new Dog();</span>
+        <span class="token comment">//使用反射创建对象</span>
+        <span class="token comment">//1.获取类的完整路径字符串</span>
+        <span class="token class-name">String</span> className <span class="token operator">=</span> <span class="token string">&quot;com.bjsxt.why.Dog&quot;</span><span class="token punctuation">;</span>
+        <span class="token comment">//2.根据完整路径字符串获取Class对象信息</span>
+        <span class="token class-name">Class</span> clazz <span class="token operator">=</span> <span class="token class-name">Class</span><span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span>className<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//3.获取无参数构造方法</span>
+        <span class="token class-name">Constructor</span> con <span class="token operator">=</span> clazz<span class="token punctuation">.</span><span class="token function">getConstructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//4.使用无参数构造方法来创建对象</span>
+        <span class="token class-name">Object</span> obj <span class="token operator">=</span> con<span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><h2 id="使用反射操作属性"><a href="#使用反射操作属性" class="header-anchor">#</a> 使用反射操作属性</h2> <p>通过Class对象的getFields()或者getField()方法可以获得该类所包括的全部Field属性或指定Field属性。Field类提供了以下方法来访问属性</p> <ul><li>getXxx(Object obj)：获取obj对象该Field的属性值。此处的Xxx对应8个基本数据类型，如果该属性类型是引用类型则直接使用get(Object obj)</li> <li>setXxx(Object obj,Xxx val)：将obj对象的该Field赋值val。此处的Xxx对应8个基本数据类型，如果该属性类型是引用类型则直接使用set(Object obj, Object val)</li> <li>setAccessible(Boolean flag)：若flag为true，则取消属性的访问权限控制，即使private属性也可以进行访问</li></ul> <p><strong>代码示例：使用反射操作属性</strong></p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestField</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span><span class="token punctuation">{</span>
+        <span class="token comment">//不使用反射操作属</span>
+<span class="token comment">//        Dog dog = new Dog();</span>
+<span class="token comment">//        dog.nickName = &quot;旺财&quot;;</span>
+<span class="token comment">//        dog.age =&quot;黑色&quot;;</span>
+<span class="token comment">//        System.out.println(dog.nickName);</span>
+<span class="token comment">//        System.out.println(dog.color);</span>
+        <span class="token comment">//使用反射操作属性  实际操作中使用反射直接操作属性也不多</span>
+        <span class="token comment">//1.获取类的完整路径字符串</span>
+        <span class="token class-name">String</span> className <span class="token operator">=</span> <span class="token string">&quot;com.bjsxt.why.Dog&quot;</span><span class="token punctuation">;</span>
+        <span class="token comment">//2.得到类对象</span>
+        <span class="token class-name">Class</span> clazz <span class="token operator">=</span> <span class="token class-name">Class</span><span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span>className<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//3.使用反射创建对象</span>
+        <span class="token comment">//Object dog = clazz.newInstance();</span>
+        <span class="token class-name">Object</span> dog <span class="token operator">=</span> clazz<span class="token punctuation">.</span><span class="token function">getConstructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//4.获取属性</span>
+        <span class="token class-name">Field</span> f1 <span class="token operator">=</span>  clazz<span class="token punctuation">.</span><span class="token function">getField</span><span class="token punctuation">(</span><span class="token string">&quot;color&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token comment">//Field f2 = clazz.getField(&quot;age&quot;);</span>
+        <span class="token class-name">Field</span> f2 <span class="token operator">=</span> clazz<span class="token punctuation">.</span><span class="token function">getDeclaredField</span><span class="token punctuation">(</span><span class="token string">&quot;age&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//5.给属性赋值</span>
+        f1<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>dog<span class="token punctuation">,</span><span class="token string">&quot;黑色1&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//  dog.color =&quot;黑色&quot;;</span>
+        f2<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//突破权限的控制</span>
+        f2<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>dog<span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//6.输出给属性</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>f1<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>dog<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//dog.color</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>f2<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>dog<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//dog.age</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>dog<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br></div></div><h2 id="使用反射执行方法"><a href="#使用反射执行方法" class="header-anchor">#</a> 使用反射执行方法</h2> <ul><li>通过Class对象的getMethods() 方法可以获得该类所包括的全部方法, 返回值是Method[]</li> <li>通过Class对象的getMethod()方法可以获得该类所包括的指定方法, 返回值是Method</li> <li>每个Method对象对应一个方法，获得Method对象后，可以调用其invoke() 来调用对应方法</li> <li>Object invoke(Object obj,Object [] args):obj代表当前方法所属的对象的名字，args代表当前方法的参数列表，返回值Object是当前方法的返回值，即执行当前方法的结果。</li></ul> <p><strong>代码示例：使用反射执行方法</strong></p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestMethod</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span><span class="token punctuation">{</span>
+        <span class="token comment">//不使用反射执行方法</span>
+<span class="token comment">//        Dog dog = new Dog();</span>
+<span class="token comment">//        dog.shout();</span>
+<span class="token comment">//        int result = dog.add(10,20);</span>
+<span class="token comment">//        System.out.println(result);</span>
+        <span class="token comment">//使用反射执行方法</span>
+        <span class="token comment">//1.获取类的完整路径字符串</span>
+        <span class="token class-name">String</span> className <span class="token operator">=</span> <span class="token string">&quot;com.bjsxt.why.Dog&quot;</span><span class="token punctuation">;</span>
+        <span class="token comment">//2.得到类对象</span>
+        <span class="token class-name">Class</span> clazz <span class="token operator">=</span> <span class="token class-name">Class</span><span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span>className<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//3.使用反射创建对象</span>
+        <span class="token comment">//Object dog = clazz.newInstance();</span>
+        <span class="token class-name">Object</span> dog <span class="token operator">=</span> clazz<span class="token punctuation">.</span><span class="token function">getConstructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//4.获取方法</span>
+        <span class="token class-name">Method</span> m1 <span class="token operator">=</span> clazz<span class="token punctuation">.</span><span class="token function">getMethod</span><span class="token punctuation">(</span><span class="token string">&quot;shout&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Method</span> m2 <span class="token operator">=</span> clazz<span class="token punctuation">.</span><span class="token function">getMethod</span><span class="token punctuation">(</span><span class="token string">&quot;add&quot;</span><span class="token punctuation">,</span><span class="token keyword">int</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span><span class="token keyword">int</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//5.使用反射执行方法</span>
+        m1<span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span>dog<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//dog.shout();</span>
+        <span class="token class-name">Object</span> result <span class="token operator">=</span> m2<span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span>dog<span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br></div></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.090a2d6d.js" defer></script><script src="/assets/js/2.cf1cc9d0.js" defer></script><script src="/assets/js/13.4c7ffc8f.js" defer></script>
+  </body>
+</html>

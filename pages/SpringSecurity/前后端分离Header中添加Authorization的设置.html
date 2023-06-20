@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>SpringSecurity前后端分离Header中添加Authorization的设置以及跨域问题踩坑记录 | CtrlCVer</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <link rel="icon" href="/6.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <meta name="description" content="孙文豪大魔王">
+    
+    <link rel="preload" href="/assets/css/0.styles.688e7b51.css" as="style"><link rel="preload" href="/assets/js/app.090a2d6d.js" as="script"><link rel="preload" href="/assets/js/2.cf1cc9d0.js" as="script"><link rel="preload" href="/assets/js/63.ea353428.js" as="script"><link rel="prefetch" href="/assets/js/10.1acf2cf5.js"><link rel="prefetch" href="/assets/js/11.916bd407.js"><link rel="prefetch" href="/assets/js/12.d4764c77.js"><link rel="prefetch" href="/assets/js/13.4c7ffc8f.js"><link rel="prefetch" href="/assets/js/14.9b1e93c0.js"><link rel="prefetch" href="/assets/js/15.ed908bfd.js"><link rel="prefetch" href="/assets/js/16.f0385ef6.js"><link rel="prefetch" href="/assets/js/17.8590f7d9.js"><link rel="prefetch" href="/assets/js/18.e81d9f69.js"><link rel="prefetch" href="/assets/js/19.30d3132d.js"><link rel="prefetch" href="/assets/js/20.26d77569.js"><link rel="prefetch" href="/assets/js/21.9801f8dc.js"><link rel="prefetch" href="/assets/js/22.1ab408ef.js"><link rel="prefetch" href="/assets/js/23.4185e811.js"><link rel="prefetch" href="/assets/js/24.c8717881.js"><link rel="prefetch" href="/assets/js/25.ae9ccce4.js"><link rel="prefetch" href="/assets/js/26.0d7caa52.js"><link rel="prefetch" href="/assets/js/27.6241fe96.js"><link rel="prefetch" href="/assets/js/28.202edb24.js"><link rel="prefetch" href="/assets/js/29.3cafeb4e.js"><link rel="prefetch" href="/assets/js/3.7d9f72a4.js"><link rel="prefetch" href="/assets/js/30.f7f0c55c.js"><link rel="prefetch" href="/assets/js/31.85d98bbe.js"><link rel="prefetch" href="/assets/js/32.cbacafbd.js"><link rel="prefetch" href="/assets/js/33.988aa58d.js"><link rel="prefetch" href="/assets/js/34.d4c01595.js"><link rel="prefetch" href="/assets/js/35.b81c4294.js"><link rel="prefetch" href="/assets/js/36.36383d8c.js"><link rel="prefetch" href="/assets/js/37.98ca69aa.js"><link rel="prefetch" href="/assets/js/38.7964a6d0.js"><link rel="prefetch" href="/assets/js/39.25ab8983.js"><link rel="prefetch" href="/assets/js/4.aa32c119.js"><link rel="prefetch" href="/assets/js/40.6298ffd4.js"><link rel="prefetch" href="/assets/js/41.cb3ca264.js"><link rel="prefetch" href="/assets/js/42.10a52abf.js"><link rel="prefetch" href="/assets/js/43.b561214c.js"><link rel="prefetch" href="/assets/js/44.80ee1f94.js"><link rel="prefetch" href="/assets/js/45.f9cbe66c.js"><link rel="prefetch" href="/assets/js/46.bf9e8c2d.js"><link rel="prefetch" href="/assets/js/47.2e42681b.js"><link rel="prefetch" href="/assets/js/48.c7de4200.js"><link rel="prefetch" href="/assets/js/49.aac7d625.js"><link rel="prefetch" href="/assets/js/5.44f377f3.js"><link rel="prefetch" href="/assets/js/50.263c6574.js"><link rel="prefetch" href="/assets/js/51.7b216a64.js"><link rel="prefetch" href="/assets/js/52.32c2c6b6.js"><link rel="prefetch" href="/assets/js/53.76741f71.js"><link rel="prefetch" href="/assets/js/54.d40dd513.js"><link rel="prefetch" href="/assets/js/55.b8472a52.js"><link rel="prefetch" href="/assets/js/56.70e30030.js"><link rel="prefetch" href="/assets/js/57.05e5bce6.js"><link rel="prefetch" href="/assets/js/58.bced5ca1.js"><link rel="prefetch" href="/assets/js/59.0afe9a10.js"><link rel="prefetch" href="/assets/js/6.c17ba07d.js"><link rel="prefetch" href="/assets/js/60.4a251428.js"><link rel="prefetch" href="/assets/js/61.16f714c5.js"><link rel="prefetch" href="/assets/js/62.54178f3f.js"><link rel="prefetch" href="/assets/js/64.5fa3e033.js"><link rel="prefetch" href="/assets/js/65.c943fc85.js"><link rel="prefetch" href="/assets/js/66.c976beae.js"><link rel="prefetch" href="/assets/js/67.d12c057d.js"><link rel="prefetch" href="/assets/js/68.b825a20a.js"><link rel="prefetch" href="/assets/js/69.1955d09d.js"><link rel="prefetch" href="/assets/js/7.1165067c.js"><link rel="prefetch" href="/assets/js/70.5ba0878f.js"><link rel="prefetch" href="/assets/js/8.267ff3e9.js"><link rel="prefetch" href="/assets/js/9.341459e9.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.688e7b51.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/2.png" alt="CtrlCVer" class="logo"> <span class="site-name can-hide">CtrlCVer</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="数据库" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="数据库" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/数据库/JAVA反射机制.html" class="nav-link">
+  JAVA反射机制
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Vue" class="dropdown-title"><span class="title">Vue</span> <span class="arrow down"></span></button> <button type="button" aria-label="Vue" class="mobile-dropdown-title"><span class="title">Vue</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/Vue/Vue-loading动态加载.html" class="nav-link">
+  Vue-loading动态加载
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Vue/Vue项目用axios做request封装.html" class="nav-link">
+  Vue项目用axios做request封装
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Vue/前端踩坑之路.html" class="nav-link">
+  前端踩坑之路
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringBoot" class="dropdown-title"><span class="title">SpringBoot</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringBoot" class="mobile-dropdown-title"><span class="title">SpringBoot</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/aop面向切面编程.html" class="nav-link">
+  aop面向切面编程
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Cron表达式.html" class="nav-link">
+  Cron表达式
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/issue3.html" class="nav-link">
+  issue3
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Listener监听器.html" class="nav-link">
+  Listener监听器
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Mybatis 动态SQL.html" class="nav-link">
+  Mybatis 动态SQL
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Mybatis.html" class="nav-link">
+  Mybatis
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/mybatis和spring整合.html" class="nav-link">
+  mybatis和spring整合
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Mybatis缓存机制.html" class="nav-link">
+  Mybatis缓存机制
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/session之 HttpSessionActivation.html" class="nav-link">
+  session之 HttpSessionActivation
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/springboot+vue部署后出现springboot后端部分页面404.html" class="nav-link">
+  springboot+vue部署后出现springboot后端部分页面404
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/springboot.html" class="nav-link">
+  springboot
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/SpringMVC介绍.html" class="nav-link">
+  SpringMVC介绍
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/springmvc重定向和请求转发操作.html" class="nav-link">
+  springmvc重定向和请求转发操作
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Spring介绍.html" class="nav-link">
+  Spring介绍
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/SSM整合开发.html" class="nav-link">
+  SSM整合开发
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/url-pattern设置.html" class="nav-link">
+  url-pattern设置
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/web开发.html" class="nav-link">
+  web开发
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/yaml.html" class="nav-link">
+  yaml
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/单元测试.html" class="nav-link">
+  单元测试
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/启动原理.html" class="nav-link">
+  启动原理
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/嵌入式servlet服务器.html" class="nav-link">
+  嵌入式servlet服务器
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/异常，拦截器....html" class="nav-link">
+  异常，拦截器...
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/执行流程分析.html" class="nav-link">
+  执行流程分析
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/指标监控.html" class="nav-link">
+  指标监控
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/数据访问.html" class="nav-link">
+  数据访问
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/注意.html" class="nav-link">
+  注意
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/注解.html" class="nav-link">
+  注解
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/注解方式注入.html" class="nav-link">
+  注解方式注入
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/源码分析.html" class="nav-link">
+  源码分析
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/高级特性.html" class="nav-link">
+  高级特性
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringSecurity" class="dropdown-title"><span class="title">SpringSecurity</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringSecurity" class="mobile-dropdown-title"><span class="title">SpringSecurity</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/SpringSecurity/前后端分离Header中添加Authorization的设置.html" class="nav-link">
+  前后端分离Header中添加Authorization的设置
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringSecurity/基本解读.html" class="nav-link">
+  基本解读
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringSecurity/基本配置.html" class="nav-link">
+  基本配置
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringCloud" class="dropdown-title"><span class="title">SpringCloud</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringCloud" class="mobile-dropdown-title"><span class="title">SpringCloud</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Eureka.html" class="nav-link">
+  Eureka
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Gateway.html" class="nav-link">
+  Gateway
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Hystrix断路器.html" class="nav-link">
+  Hystrix断路器
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/nacos-config.html" class="nav-link">
+  nacos-config
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/nacos.html" class="nav-link">
+  nacos
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/nacos集群和持久化配置.html" class="nav-link">
+  nacos集群和持久化配置
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/OpenFeign ISsue.html" class="nav-link">
+  OpenFeign ISsue
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/OpenFeign-issue.html" class="nav-link">
+  OpenFeign-issue
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/OpenFeign服务接口调用.html" class="nav-link">
+  OpenFeign服务接口调用
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/question.html" class="nav-link">
+  question
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/seata.html" class="nav-link">
+  seata
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/security.html" class="nav-link">
+  security
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/sentinel.html" class="nav-link">
+  sentinel
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Sentinel实现熔断与限流.html" class="nav-link">
+  Sentinel实现熔断与限流
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Spring Cloud Ribbon.html" class="nav-link">
+  Spring Cloud Ribbon
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/spring-cloud-stream.html" class="nav-link">
+  spring-cloud-stream
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/stream3.2学习.html" class="nav-link">
+  stream3.2学习
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/zookeeper.html" class="nav-link">
+  zookeeper
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/配置中心.html" class="nav-link">
+  配置中心
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="JVM" class="dropdown-title"><span class="title">JVM</span> <span class="arrow down"></span></button> <button type="button" aria-label="JVM" class="mobile-dropdown-title"><span class="title">JVM</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/JVM/JAVA反射机制.html" class="nav-link">
+  JAVA反射机制
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Project" class="dropdown-title"><span class="title">Project</span> <span class="arrow down"></span></button> <button type="button" aria-label="Project" class="mobile-dropdown-title"><span class="title">Project</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/Project/clash部署至服务器，提供“上网”服务.html" class="nav-link">
+  clash部署至服务器，提供“上网”服务
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Project/Unicloud 阿里云服务器作图床.html" class="nav-link">
+  Unicloud 阿里云服务器作图床
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Project/内网穿透技术初探.html" class="nav-link">
+  内网穿透技术初探
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Project/微信订阅号开发.html" class="nav-link">
+  微信订阅号开发
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="机器视觉" class="dropdown-title"><span class="title">机器视觉</span> <span class="arrow down"></span></button> <button type="button" aria-label="机器视觉" class="mobile-dropdown-title"><span class="title">机器视觉</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/机器视觉/RTMPose.html" class="nav-link">
+  RTMPose
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="面试题" class="dropdown-title"><span class="title">面试题</span> <span class="arrow down"></span></button> <button type="button" aria-label="面试题" class="mobile-dropdown-title"><span class="title">面试题</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/面试题/Redis.html" class="nav-link">
+  Redis
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/sunwenhaopro" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://www.ctrlcver.icu" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  博客
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://photowall.ctrlcver.icu" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  PhotoWall
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="数据库" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="数据库" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/数据库/JAVA反射机制.html" class="nav-link">
+  JAVA反射机制
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Vue" class="dropdown-title"><span class="title">Vue</span> <span class="arrow down"></span></button> <button type="button" aria-label="Vue" class="mobile-dropdown-title"><span class="title">Vue</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/Vue/Vue-loading动态加载.html" class="nav-link">
+  Vue-loading动态加载
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Vue/Vue项目用axios做request封装.html" class="nav-link">
+  Vue项目用axios做request封装
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Vue/前端踩坑之路.html" class="nav-link">
+  前端踩坑之路
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringBoot" class="dropdown-title"><span class="title">SpringBoot</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringBoot" class="mobile-dropdown-title"><span class="title">SpringBoot</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/aop面向切面编程.html" class="nav-link">
+  aop面向切面编程
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Cron表达式.html" class="nav-link">
+  Cron表达式
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/issue3.html" class="nav-link">
+  issue3
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Listener监听器.html" class="nav-link">
+  Listener监听器
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Mybatis 动态SQL.html" class="nav-link">
+  Mybatis 动态SQL
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Mybatis.html" class="nav-link">
+  Mybatis
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/mybatis和spring整合.html" class="nav-link">
+  mybatis和spring整合
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Mybatis缓存机制.html" class="nav-link">
+  Mybatis缓存机制
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/session之 HttpSessionActivation.html" class="nav-link">
+  session之 HttpSessionActivation
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/springboot+vue部署后出现springboot后端部分页面404.html" class="nav-link">
+  springboot+vue部署后出现springboot后端部分页面404
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/springboot.html" class="nav-link">
+  springboot
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/SpringMVC介绍.html" class="nav-link">
+  SpringMVC介绍
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/springmvc重定向和请求转发操作.html" class="nav-link">
+  springmvc重定向和请求转发操作
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Spring介绍.html" class="nav-link">
+  Spring介绍
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/SSM整合开发.html" class="nav-link">
+  SSM整合开发
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/url-pattern设置.html" class="nav-link">
+  url-pattern设置
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/web开发.html" class="nav-link">
+  web开发
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/yaml.html" class="nav-link">
+  yaml
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/单元测试.html" class="nav-link">
+  单元测试
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/启动原理.html" class="nav-link">
+  启动原理
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/嵌入式servlet服务器.html" class="nav-link">
+  嵌入式servlet服务器
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/异常，拦截器....html" class="nav-link">
+  异常，拦截器...
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/执行流程分析.html" class="nav-link">
+  执行流程分析
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/指标监控.html" class="nav-link">
+  指标监控
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/数据访问.html" class="nav-link">
+  数据访问
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/注意.html" class="nav-link">
+  注意
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/注解.html" class="nav-link">
+  注解
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/注解方式注入.html" class="nav-link">
+  注解方式注入
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/源码分析.html" class="nav-link">
+  源码分析
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/高级特性.html" class="nav-link">
+  高级特性
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringSecurity" class="dropdown-title"><span class="title">SpringSecurity</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringSecurity" class="mobile-dropdown-title"><span class="title">SpringSecurity</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/SpringSecurity/前后端分离Header中添加Authorization的设置.html" class="nav-link">
+  前后端分离Header中添加Authorization的设置
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringSecurity/基本解读.html" class="nav-link">
+  基本解读
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringSecurity/基本配置.html" class="nav-link">
+  基本配置
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringCloud" class="dropdown-title"><span class="title">SpringCloud</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringCloud" class="mobile-dropdown-title"><span class="title">SpringCloud</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Eureka.html" class="nav-link">
+  Eureka
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Gateway.html" class="nav-link">
+  Gateway
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Hystrix断路器.html" class="nav-link">
+  Hystrix断路器
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/nacos-config.html" class="nav-link">
+  nacos-config
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/nacos.html" class="nav-link">
+  nacos
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/nacos集群和持久化配置.html" class="nav-link">
+  nacos集群和持久化配置
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/OpenFeign ISsue.html" class="nav-link">
+  OpenFeign ISsue
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/OpenFeign-issue.html" class="nav-link">
+  OpenFeign-issue
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/OpenFeign服务接口调用.html" class="nav-link">
+  OpenFeign服务接口调用
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/question.html" class="nav-link">
+  question
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/seata.html" class="nav-link">
+  seata
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/security.html" class="nav-link">
+  security
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/sentinel.html" class="nav-link">
+  sentinel
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Sentinel实现熔断与限流.html" class="nav-link">
+  Sentinel实现熔断与限流
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Spring Cloud Ribbon.html" class="nav-link">
+  Spring Cloud Ribbon
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/spring-cloud-stream.html" class="nav-link">
+  spring-cloud-stream
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/stream3.2学习.html" class="nav-link">
+  stream3.2学习
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/zookeeper.html" class="nav-link">
+  zookeeper
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/配置中心.html" class="nav-link">
+  配置中心
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="JVM" class="dropdown-title"><span class="title">JVM</span> <span class="arrow down"></span></button> <button type="button" aria-label="JVM" class="mobile-dropdown-title"><span class="title">JVM</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/JVM/JAVA反射机制.html" class="nav-link">
+  JAVA反射机制
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Project" class="dropdown-title"><span class="title">Project</span> <span class="arrow down"></span></button> <button type="button" aria-label="Project" class="mobile-dropdown-title"><span class="title">Project</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/Project/clash部署至服务器，提供“上网”服务.html" class="nav-link">
+  clash部署至服务器，提供“上网”服务
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Project/Unicloud 阿里云服务器作图床.html" class="nav-link">
+  Unicloud 阿里云服务器作图床
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Project/内网穿透技术初探.html" class="nav-link">
+  内网穿透技术初探
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Project/微信订阅号开发.html" class="nav-link">
+  微信订阅号开发
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="机器视觉" class="dropdown-title"><span class="title">机器视觉</span> <span class="arrow down"></span></button> <button type="button" aria-label="机器视觉" class="mobile-dropdown-title"><span class="title">机器视觉</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/机器视觉/RTMPose.html" class="nav-link">
+  RTMPose
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="面试题" class="dropdown-title"><span class="title">面试题</span> <span class="arrow down"></span></button> <button type="button" aria-label="面试题" class="mobile-dropdown-title"><span class="title">面试题</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/面试题/Redis.html" class="nav-link">
+  Redis
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/sunwenhaopro" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://www.ctrlcver.icu" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  博客
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://photowall.ctrlcver.icu" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  PhotoWall
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/pages/SpringSecurity/前后端分离Header中添加Authorization的设置.html" class="active sidebar-link">SpringSecurity前后端分离Header中添加Authorization的设置以及跨域问题踩坑记录</a></li><li><a href="/pages/SpringSecurity/基本解读.html" class="sidebar-link">UserDetails</a></li><li><a href="/pages/SpringSecurity/基本配置.html" class="sidebar-link">配置</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="springsecurity前后端分离header中添加authorization的设置以及跨域问题踩坑记录"><a href="#springsecurity前后端分离header中添加authorization的设置以及跨域问题踩坑记录" class="header-anchor">#</a> SpringSecurity前后端分离Header中添加Authorization的设置以及跨域问题踩坑记录</h1> <p>前端登录成功后将后端放在Response  header里面Authorization字段提取出来，存入到store（这里我后端Authorization大写，浏览器响应也是大写，我前端原来也是大写但是为undefined，打印header后发现是小写authorization很奇怪）</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code> store<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span>'changeLogin'<span class="token punctuation">,</span><span class="token punctuation">{</span> <span class="token class-name">Authorization</span><span class="token operator">:</span> res<span class="token punctuation">.</span>headers<span class="token punctuation">[</span>'authorization'<span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token keyword">this</span><span class="token punctuation">.</span>$router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>'<span class="token operator">/</span>admin<span class="token operator">/</span>resource'<span class="token punctuation">)</span> 
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>main.js文件里面设置每次请求添加Authorization：token</p> <div class="language-js line-numbers-mode"><pre class="language-js"><code>axios<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>request<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>
+  <span class="token parameter">config</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span>localStorage<span class="token punctuation">.</span><span class="token function">getItem</span><span class="token punctuation">(</span><span class="token string">'Authorization'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          config<span class="token punctuation">.</span>headers<span class="token punctuation">[</span><span class="token string">'Authorization'</span><span class="token punctuation">]</span> <span class="token operator">=</span> window<span class="token punctuation">.</span>localStorage<span class="token punctuation">.</span><span class="token function">getItem</span><span class="token punctuation">(</span><span class="token string">'Authorization'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">return</span> config<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token parameter">error</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>但是这时请求会出现跨域问题，（不加时正常访问）</p> <div class="language-js line-numbers-mode"><pre class="language-js"><code>Access to XMLHttpRequest at ‘http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>xxxxxxxx’ from origin ‘http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>xxxxxxxx’ has been blocked by <span class="token constant">CORS</span> <span class="token literal-property property">policy</span><span class="token operator">:</span> Response to preflight request doesn’t pass access control check<span class="token operator">:</span> No ‘Access<span class="token operator">-</span>Control<span class="token operator">-</span>Allow<span class="token operator">-</span>Origin’ header is present on the requested resource<span class="token punctuation">.</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>​    这是因为浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request）。</p> <p>1、简单请求
+  只要同时满足以下两大条件，就属于简单请求。</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code>（<span class="token number">1</span><span class="token punctuation">)</span> 请求方法是以下三种方法之一：<span class="token constant">HEAD</span>、<span class="token constant">GET</span>、<span class="token constant">POST</span>
+（<span class="token number">2</span>）<span class="token constant">HTTP</span>的头信息不超出以下几种字段：
+<span class="token class-name">Accept</span>
+<span class="token class-name">Accept</span><span class="token operator">-</span><span class="token class-name">Language</span>
+<span class="token class-name">Content</span><span class="token operator">-</span><span class="token class-name">Language</span>
+<span class="token class-name">Last</span><span class="token operator">-</span><span class="token class-name">Event</span><span class="token operator">-</span><span class="token constant">ID</span>
+<span class="token class-name">Content</span><span class="token operator">-</span><span class="token class-name">Type</span>：只限于三个值 application<span class="token operator">/</span>x<span class="token operator">-</span>www<span class="token operator">-</span>form<span class="token operator">-</span>urlencoded、multipart<span class="token operator">/</span>form<span class="token operator">-</span>data、text<span class="token operator">/</span>plain
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>凡是不同时满足上面两个条件，就属于非简单请求。</p> <p>由于我向请求头中添加了自定义的属性，所以发送请求时就属于非简单请求。</p> <p>2、预检请求
+  非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为 “预检” 请求（preflight）。</p> <p>浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头信息字段。只有得到肯定答复，浏览器才会发出正式的XMLHttpRequest请求，否则就报错。
+从上图中可以看出浏览器发送了两次getAllImages请求，一次操作方法为OPTIONS，一次为GET。OPTIONS请求即为预检请求，用于判断后端服务是否能接受OPTIONS请求，注意这个请求是没有Auh字段的。如果没在Header里面添加Auth字段则为一次普通的GET请求。由于后端拦截器逻辑获取Auth字段导致为null，抛出异常，不能执行完整的 filterChain.doFilter导致浏览器认为OPTIONS操作不允许，所以出现上述跨域问题。</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code>   <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                    <span class="token class-name">String</span> token <span class="token operator">=</span> httpServletRequest<span class="token punctuation">.</span><span class="token function">getHeader</span><span class="token punctuation">(</span><span class="token string">&quot;Authorization&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;token&quot;</span> <span class="token operator">+</span> token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    stringRedisTemplate<span class="token punctuation">.</span><span class="token function">opsForSet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">isMember</span><span class="token punctuation">(</span><span class="token string">&quot;Token&quot;</span><span class="token punctuation">,</span> token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    filterChain<span class="token punctuation">.</span><span class="token function">doFilter</span><span class="token punctuation">(</span>httpServletRequest<span class="token punctuation">,</span> httpServletResponse<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token class-name">Map</span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;code&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;401&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;message&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;无权限&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token class-name">PrintWriter</span> out <span class="token operator">=</span> httpServletResponse<span class="token punctuation">.</span><span class="token function">getWriter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    out<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ObjectMapper</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">writeValueAsString</span><span class="token punctuation">(</span>map<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    out<span class="token punctuation">.</span><span class="token function">flush</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    out<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><p>OPTIONS请求失败，我全局配置的CORS应该是晚于自定义的handler，所以出现了即使CORS配置了OPTIONS操作的许可，还是出现跨域问题了。</p> <p>我的解决办法加一次判断如果是OPTIONS直接放行dofilter操作，这样的话浏览器OPTIONS预请求成功，就能发送带Auth的GET请求</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>httpServletRequest<span class="token punctuation">.</span><span class="token function">getRequestURI</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">&quot;/login&quot;</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>httpServletRequest<span class="token punctuation">.</span><span class="token function">getRequestURI</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">&quot;/getAllTag&quot;</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>httpServletRequest<span class="token punctuation">.</span><span class="token function">getRequestURI</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">&quot;/getAllImage&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">&quot;OPTIONS&quot;</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>httpServletRequest<span class="token punctuation">.</span><span class="token function">getMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                filterChain<span class="token punctuation">.</span><span class="token function">doFilter</span><span class="token punctuation">(</span>httpServletRequest<span class="token punctuation">,</span> httpServletResponse<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                httpServletResponse<span class="token punctuation">.</span><span class="token function">setContentType</span><span class="token punctuation">(</span><span class="token string">&quot;application/json;charset=utf-8&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">this</span><span class="token punctuation">.</span>stringRedisTemplate<span class="token punctuation">.</span><span class="token function">opsForSet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">isMember</span><span class="token punctuation">(</span><span class="token string">&quot;Token&quot;</span><span class="token punctuation">,</span> token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    filterChain<span class="token punctuation">.</span><span class="token function">doFilter</span><span class="token punctuation">(</span>httpServletRequest<span class="token punctuation">,</span> httpServletResponse<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> var7<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token class-name">Map</span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;code&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;401&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;message&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;无权限&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token class-name">PrintWriter</span> out <span class="token operator">=</span> httpServletResponse<span class="token punctuation">.</span><span class="token function">getWriter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    out<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ObjectMapper</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">writeValueAsString</span><span class="token punctuation">(</span>map<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    out<span class="token punctuation">.</span><span class="token function">flush</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    out<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            filterChain<span class="token punctuation">.</span><span class="token function">doFilter</span><span class="token punctuation">(</span>httpServletRequest<span class="token punctuation">,</span> httpServletResponse<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><p>或者简单Security配置一下</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token annotation punctuation">@Override</span>
+<span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">configure</span><span class="token punctuation">(</span><span class="token class-name">HttpSecurity</span> http<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">{</span>
+    http
+        <span class="token comment">// by default uses a Bean by the name of corsConfigurationSource</span>
+        <span class="token punctuation">.</span><span class="token function">cors</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">and</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment">//跨域请求会先进行一次options请求</span>
+        <span class="token punctuation">.</span><span class="token function">antMatchers</span><span class="token punctuation">(</span><span class="token class-name">HttpMethod</span><span class="token punctuation">.</span><span class="token constant">OPTIONS</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">permitAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>后面我像设置一下别处登录后上一个登录的终端请求失效</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code> <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">doFilterInternal</span><span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span> httpServletRequest<span class="token punctuation">,</span> <span class="token class-name">HttpServletResponse</span> httpServletResponse<span class="token punctuation">,</span> <span class="token class-name">FilterChain</span> filterChain<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">ServletException</span><span class="token punctuation">,</span> <span class="token class-name">IOException</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>httpServletRequest<span class="token punctuation">.</span><span class="token function">getRequestURI</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">&quot;/login&quot;</span><span class="token punctuation">)</span> <span class="token operator">||</span> httpServletRequest<span class="token punctuation">.</span><span class="token function">getRequestURI</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">&quot;/getAllTag&quot;</span><span class="token punctuation">)</span>
+                <span class="token operator">||</span> httpServletRequest<span class="token punctuation">.</span><span class="token function">getRequestURI</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">&quot;/getAllImage&quot;</span><span class="token punctuation">)</span>
+                <span class="token operator">||</span> httpServletRequest<span class="token punctuation">.</span><span class="token function">getRequestURI</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">&quot;/vercode&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            filterChain<span class="token punctuation">.</span><span class="token function">doFilter</span><span class="token punctuation">(</span>httpServletRequest<span class="token punctuation">,</span> httpServletResponse<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">&quot;OPTIONS&quot;</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>httpServletRequest<span class="token punctuation">.</span><span class="token function">getMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                filterChain<span class="token punctuation">.</span><span class="token function">doFilter</span><span class="token punctuation">(</span>httpServletRequest<span class="token punctuation">,</span> httpServletResponse<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                <span class="token keyword">try</span><span class="token punctuation">{</span>
+            
+                httpServletResponse<span class="token punctuation">.</span><span class="token function">setContentType</span><span class="token punctuation">(</span><span class="token string">&quot;application/json;charset=utf-8&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+              
+                <span class="token class-name">String</span> token <span class="token operator">=</span> httpServletRequest<span class="token punctuation">.</span><span class="token function">getHeader</span><span class="token punctuation">(</span><span class="token string">&quot;Authorization&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+              
+                
+                    <span class="token class-name">Claims</span> claims <span class="token operator">=</span> jwtUtil<span class="token punctuation">.</span><span class="token function">getClaimsByToken</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                 
+                    <span class="token class-name">Boolean</span> redisToken <span class="token operator">=</span> redisTemplate<span class="token punctuation">.</span><span class="token function">opsForHash</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">hasKey</span><span class="token punctuation">(</span><span class="token string">&quot;Token&quot;</span><span class="token punctuation">,</span> claims<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&quot;sub&quot;</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>redisToken<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>token<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>redisTemplate<span class="token punctuation">.</span><span class="token function">opsForHash</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&quot;Token&quot;</span><span class="token punctuation">,</span> claims<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&quot;sub&quot;</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                            filterChain<span class="token punctuation">.</span><span class="token function">doFilter</span><span class="token punctuation">(</span>httpServletRequest<span class="token punctuation">,</span> httpServletResponse<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                            httpServletResponse<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">&quot;Access-Control-Allow-Origin&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;*&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            <span class="token class-name">Map</span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;code&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;403&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;message&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;账户已在别处登录&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                         
+                            <span class="token class-name">PrintWriter</span> out <span class="token operator">=</span> httpServletResponse<span class="token punctuation">.</span><span class="token function">getWriter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            out<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ObjectMapper</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">writeValueAsString</span><span class="token punctuation">(</span>map<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            out<span class="token punctuation">.</span><span class="token function">flush</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            out<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token class-name">Map</span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;code&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;401&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;message&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;无权限&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token class-name">PrintWriter</span> out <span class="token operator">=</span> httpServletResponse<span class="token punctuation">.</span><span class="token function">getWriter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    out<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ObjectMapper</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">writeValueAsString</span><span class="token punctuation">(</span>map<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    out<span class="token punctuation">.</span><span class="token function">flush</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    out<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br></div></div><p>又出现需要认证接口的跨域问题了</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>No ‘Access-Control-Allow-Origin‘ header is present on the requested resource.
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>后面查阅资料发现可以自定义一个requestfilter，header添加上Access-Control-Allow-Origin</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token annotation punctuation">@WebFilter</span><span class="token punctuation">(</span>filterName <span class="token operator">=</span> <span class="token string">&quot;requestFilter&quot;</span><span class="token punctuation">,</span> urlPatterns <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">&quot;/*&quot;</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RequestFilter</span> <span class="token keyword">implements</span> <span class="token class-name">Filter</span> <span class="token punctuation">{</span>
+ 
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token class-name">FilterConfig</span> filterConfig<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">ServletException</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+ 
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doFilter</span><span class="token punctuation">(</span><span class="token class-name">ServletRequest</span> servletRequest<span class="token punctuation">,</span> <span class="token class-name">ServletResponse</span> servletResponse<span class="token punctuation">,</span> <span class="token class-name">FilterChain</span> filterChain<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span><span class="token punctuation">,</span> <span class="token class-name">ServletException</span> <span class="token punctuation">{</span>
+ 
+        <span class="token class-name">HttpServletResponse</span> response <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">HttpServletResponse</span><span class="token punctuation">)</span> servletResponse<span class="token punctuation">;</span>
+        <span class="token class-name">HttpServletRequest</span> request <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span><span class="token punctuation">)</span> servletRequest<span class="token punctuation">;</span>
+        
+        <span class="token comment">// 此处 setHeader、addHeader 方法都可用。但 addHeader时写多个会报错：“...,but only one is allowed”</span>
+        response<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">&quot;Access-Control-Allow-Origin&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;*&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment">//        response.addHeader(&quot;Access-Control-Allow-Origin&quot;, request.getHeader(&quot;origin&quot;));</span>
+        <span class="token comment">// 解决预请求（发送2次请求），此问题也可在 nginx 中作相似设置解决。</span>
+        response<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">&quot;Access-Control-Allow-Headers&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;x-requested-with,Cache-Control,Pragma,Content-Type,Token, Content-Type&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        response<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">&quot;Access-Control-Allow-Methods&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;POST, GET, OPTIONS, DELETE&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        response<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">&quot;Access-Control-Max-Age&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;3600&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        response<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">&quot;Access-Control-Allow-Credentials&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;true&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> method <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>method<span class="token punctuation">.</span><span class="token function">equalsIgnoreCase</span><span class="token punctuation">(</span><span class="token string">&quot;OPTIONS&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            servletResponse<span class="token punctuation">.</span><span class="token function">getOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token string">&quot;Success&quot;</span><span class="token punctuation">.</span><span class="token function">getBytes</span><span class="token punctuation">(</span><span class="token string">&quot;utf-8&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            filterChain<span class="token punctuation">.</span><span class="token function">doFilter</span><span class="token punctuation">(</span>servletRequest<span class="token punctuation">,</span> servletResponse<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+ 
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ 
+    <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br></div></div><p>我就想着直接在自定义tokenfilter中需要验证访问接口逻辑返回段添加   httpServletResponse.setHeader(&quot;Access-Control-Allow-Origin&quot;, &quot;*&quot;);</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code>   <span class="token keyword">if</span> <span class="token punctuation">(</span>redisToken<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>token<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>redisTemplate<span class="token punctuation">.</span><span class="token function">opsForHash</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&quot;Token&quot;</span><span class="token punctuation">,</span> claims<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&quot;sub&quot;</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                            filterChain<span class="token punctuation">.</span><span class="token function">doFilter</span><span class="token punctuation">(</span>httpServletRequest<span class="token punctuation">,</span> httpServletResponse<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                            httpServletResponse<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">&quot;Access-Control-Allow-Origin&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;*&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            <span class="token class-name">Map</span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;code&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;403&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;message&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;账户已在别处登录&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;hahahahahahah&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            <span class="token class-name">PrintWriter</span> out <span class="token operator">=</span> httpServletResponse<span class="token punctuation">.</span><span class="token function">getWriter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            out<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ObjectMapper</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">writeValueAsString</span><span class="token punctuation">(</span>map<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            out<span class="token punctuation">.</span><span class="token function">flush</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            out<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p>发现前端访问不跨域了。</p> <p>查找原因：</p> <p>界面不需要认证的接口请求：</p> <p>需要认证的接口</p> <p>对比两种GET请求  发现getAllImages请求下返回响应头没有 Access-Control-Allow-Origin: http://localhost:8080</p> <p>字段所以造出浏览器跨域问题。</p> <p>检查后端代码发现成功的接口都完整执行了filterChain.doFilter(httpServletRequest, httpServletResponse);</p> <p>所以猜测自定义的tokenfilter在securityfilter中添加这个响应头的过滤器之前，这里自定义TokenFilter验证接口验证失败直接执行了httpservletresponse.getWriter()方法返回响应，导致后面的过滤器链给响应添加 Access-Control-Allow-Origin</p> <p>的方法为执行，所以造成了跨域问题，即使自己已经全局配置了跨域。</p> <p>main.js文件配置请求和响应拦截器：</p> <div class="language-js line-numbers-mode"><pre class="language-js"><code>axios<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>response<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>
+  <span class="token parameter">res</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span> res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>code <span class="token operator">==</span> <span class="token number">403</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">&quot;！！已在其他终端登录，请重新登录！！&quot;</span><span class="token punctuation">)</span>
+        window<span class="token punctuation">.</span>localStorage<span class="token punctuation">.</span>clear
+        <span class="token comment">//记住是router 和上面router.beforeEach一样，此时app还未喧染。this不能用，$不能用</span>
+        router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">&quot;/login&quot;</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>code <span class="token operator">==</span> <span class="token number">401</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">&quot;！！无权限！！&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+       <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token parameter">err</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+    <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">&quot;！！无权限！！&quot;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+<span class="token comment">//请求拦截</span>
+axios<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>request<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>
+  <span class="token parameter">config</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span>localStorage<span class="token punctuation">.</span><span class="token function">getItem</span><span class="token punctuation">(</span><span class="token string">'Authorization'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>localStorage<span class="token punctuation">.</span><span class="token function">getItem</span><span class="token punctuation">(</span><span class="token string">'Authorization'</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">&quot;679t7867876&quot;</span><span class="token punctuation">)</span>
+          config<span class="token punctuation">.</span>headers<span class="token punctuation">[</span><span class="token string">'Authorization'</span><span class="token punctuation">]</span> <span class="token operator">=</span> window<span class="token punctuation">.</span>localStorage<span class="token punctuation">.</span><span class="token function">getItem</span><span class="token punctuation">(</span><span class="token string">'Authorization'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">return</span> config<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token parameter">error</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br></div></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><!----> <span class="next"><a href="/pages/SpringSecurity/基本解读.html">
+        UserDetails
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.090a2d6d.js" defer></script><script src="/assets/js/2.cf1cc9d0.js" defer></script><script src="/assets/js/63.ea353428.js" defer></script>
+  </body>
+</html>

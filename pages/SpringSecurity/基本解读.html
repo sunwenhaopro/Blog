@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>UserDetails | CtrlCVer</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <link rel="icon" href="/6.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <meta name="description" content="孙文豪大魔王">
+    
+    <link rel="preload" href="/assets/css/0.styles.688e7b51.css" as="style"><link rel="preload" href="/assets/js/app.090a2d6d.js" as="script"><link rel="preload" href="/assets/js/2.cf1cc9d0.js" as="script"><link rel="preload" href="/assets/js/64.5fa3e033.js" as="script"><link rel="prefetch" href="/assets/js/10.1acf2cf5.js"><link rel="prefetch" href="/assets/js/11.916bd407.js"><link rel="prefetch" href="/assets/js/12.d4764c77.js"><link rel="prefetch" href="/assets/js/13.4c7ffc8f.js"><link rel="prefetch" href="/assets/js/14.9b1e93c0.js"><link rel="prefetch" href="/assets/js/15.ed908bfd.js"><link rel="prefetch" href="/assets/js/16.f0385ef6.js"><link rel="prefetch" href="/assets/js/17.8590f7d9.js"><link rel="prefetch" href="/assets/js/18.e81d9f69.js"><link rel="prefetch" href="/assets/js/19.30d3132d.js"><link rel="prefetch" href="/assets/js/20.26d77569.js"><link rel="prefetch" href="/assets/js/21.9801f8dc.js"><link rel="prefetch" href="/assets/js/22.1ab408ef.js"><link rel="prefetch" href="/assets/js/23.4185e811.js"><link rel="prefetch" href="/assets/js/24.c8717881.js"><link rel="prefetch" href="/assets/js/25.ae9ccce4.js"><link rel="prefetch" href="/assets/js/26.0d7caa52.js"><link rel="prefetch" href="/assets/js/27.6241fe96.js"><link rel="prefetch" href="/assets/js/28.202edb24.js"><link rel="prefetch" href="/assets/js/29.3cafeb4e.js"><link rel="prefetch" href="/assets/js/3.7d9f72a4.js"><link rel="prefetch" href="/assets/js/30.f7f0c55c.js"><link rel="prefetch" href="/assets/js/31.85d98bbe.js"><link rel="prefetch" href="/assets/js/32.cbacafbd.js"><link rel="prefetch" href="/assets/js/33.988aa58d.js"><link rel="prefetch" href="/assets/js/34.d4c01595.js"><link rel="prefetch" href="/assets/js/35.b81c4294.js"><link rel="prefetch" href="/assets/js/36.36383d8c.js"><link rel="prefetch" href="/assets/js/37.98ca69aa.js"><link rel="prefetch" href="/assets/js/38.7964a6d0.js"><link rel="prefetch" href="/assets/js/39.25ab8983.js"><link rel="prefetch" href="/assets/js/4.aa32c119.js"><link rel="prefetch" href="/assets/js/40.6298ffd4.js"><link rel="prefetch" href="/assets/js/41.cb3ca264.js"><link rel="prefetch" href="/assets/js/42.10a52abf.js"><link rel="prefetch" href="/assets/js/43.b561214c.js"><link rel="prefetch" href="/assets/js/44.80ee1f94.js"><link rel="prefetch" href="/assets/js/45.f9cbe66c.js"><link rel="prefetch" href="/assets/js/46.bf9e8c2d.js"><link rel="prefetch" href="/assets/js/47.2e42681b.js"><link rel="prefetch" href="/assets/js/48.c7de4200.js"><link rel="prefetch" href="/assets/js/49.aac7d625.js"><link rel="prefetch" href="/assets/js/5.44f377f3.js"><link rel="prefetch" href="/assets/js/50.263c6574.js"><link rel="prefetch" href="/assets/js/51.7b216a64.js"><link rel="prefetch" href="/assets/js/52.32c2c6b6.js"><link rel="prefetch" href="/assets/js/53.76741f71.js"><link rel="prefetch" href="/assets/js/54.d40dd513.js"><link rel="prefetch" href="/assets/js/55.b8472a52.js"><link rel="prefetch" href="/assets/js/56.70e30030.js"><link rel="prefetch" href="/assets/js/57.05e5bce6.js"><link rel="prefetch" href="/assets/js/58.bced5ca1.js"><link rel="prefetch" href="/assets/js/59.0afe9a10.js"><link rel="prefetch" href="/assets/js/6.c17ba07d.js"><link rel="prefetch" href="/assets/js/60.4a251428.js"><link rel="prefetch" href="/assets/js/61.16f714c5.js"><link rel="prefetch" href="/assets/js/62.54178f3f.js"><link rel="prefetch" href="/assets/js/63.ea353428.js"><link rel="prefetch" href="/assets/js/65.c943fc85.js"><link rel="prefetch" href="/assets/js/66.c976beae.js"><link rel="prefetch" href="/assets/js/67.d12c057d.js"><link rel="prefetch" href="/assets/js/68.b825a20a.js"><link rel="prefetch" href="/assets/js/69.1955d09d.js"><link rel="prefetch" href="/assets/js/7.1165067c.js"><link rel="prefetch" href="/assets/js/70.5ba0878f.js"><link rel="prefetch" href="/assets/js/8.267ff3e9.js"><link rel="prefetch" href="/assets/js/9.341459e9.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.688e7b51.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/2.png" alt="CtrlCVer" class="logo"> <span class="site-name can-hide">CtrlCVer</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="数据库" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="数据库" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/数据库/JAVA反射机制.html" class="nav-link">
+  JAVA反射机制
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Vue" class="dropdown-title"><span class="title">Vue</span> <span class="arrow down"></span></button> <button type="button" aria-label="Vue" class="mobile-dropdown-title"><span class="title">Vue</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/Vue/Vue-loading动态加载.html" class="nav-link">
+  Vue-loading动态加载
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Vue/Vue项目用axios做request封装.html" class="nav-link">
+  Vue项目用axios做request封装
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Vue/前端踩坑之路.html" class="nav-link">
+  前端踩坑之路
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringBoot" class="dropdown-title"><span class="title">SpringBoot</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringBoot" class="mobile-dropdown-title"><span class="title">SpringBoot</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/aop面向切面编程.html" class="nav-link">
+  aop面向切面编程
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Cron表达式.html" class="nav-link">
+  Cron表达式
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/issue3.html" class="nav-link">
+  issue3
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Listener监听器.html" class="nav-link">
+  Listener监听器
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Mybatis 动态SQL.html" class="nav-link">
+  Mybatis 动态SQL
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Mybatis.html" class="nav-link">
+  Mybatis
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/mybatis和spring整合.html" class="nav-link">
+  mybatis和spring整合
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Mybatis缓存机制.html" class="nav-link">
+  Mybatis缓存机制
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/session之 HttpSessionActivation.html" class="nav-link">
+  session之 HttpSessionActivation
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/springboot+vue部署后出现springboot后端部分页面404.html" class="nav-link">
+  springboot+vue部署后出现springboot后端部分页面404
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/springboot.html" class="nav-link">
+  springboot
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/SpringMVC介绍.html" class="nav-link">
+  SpringMVC介绍
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/springmvc重定向和请求转发操作.html" class="nav-link">
+  springmvc重定向和请求转发操作
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Spring介绍.html" class="nav-link">
+  Spring介绍
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/SSM整合开发.html" class="nav-link">
+  SSM整合开发
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/url-pattern设置.html" class="nav-link">
+  url-pattern设置
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/web开发.html" class="nav-link">
+  web开发
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/yaml.html" class="nav-link">
+  yaml
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/单元测试.html" class="nav-link">
+  单元测试
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/启动原理.html" class="nav-link">
+  启动原理
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/嵌入式servlet服务器.html" class="nav-link">
+  嵌入式servlet服务器
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/异常，拦截器....html" class="nav-link">
+  异常，拦截器...
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/执行流程分析.html" class="nav-link">
+  执行流程分析
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/指标监控.html" class="nav-link">
+  指标监控
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/数据访问.html" class="nav-link">
+  数据访问
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/注意.html" class="nav-link">
+  注意
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/注解.html" class="nav-link">
+  注解
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/注解方式注入.html" class="nav-link">
+  注解方式注入
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/源码分析.html" class="nav-link">
+  源码分析
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/高级特性.html" class="nav-link">
+  高级特性
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringSecurity" class="dropdown-title"><span class="title">SpringSecurity</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringSecurity" class="mobile-dropdown-title"><span class="title">SpringSecurity</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/SpringSecurity/前后端分离Header中添加Authorization的设置.html" class="nav-link">
+  前后端分离Header中添加Authorization的设置
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringSecurity/基本解读.html" class="nav-link">
+  基本解读
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringSecurity/基本配置.html" class="nav-link">
+  基本配置
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringCloud" class="dropdown-title"><span class="title">SpringCloud</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringCloud" class="mobile-dropdown-title"><span class="title">SpringCloud</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Eureka.html" class="nav-link">
+  Eureka
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Gateway.html" class="nav-link">
+  Gateway
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Hystrix断路器.html" class="nav-link">
+  Hystrix断路器
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/nacos-config.html" class="nav-link">
+  nacos-config
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/nacos.html" class="nav-link">
+  nacos
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/nacos集群和持久化配置.html" class="nav-link">
+  nacos集群和持久化配置
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/OpenFeign ISsue.html" class="nav-link">
+  OpenFeign ISsue
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/OpenFeign-issue.html" class="nav-link">
+  OpenFeign-issue
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/OpenFeign服务接口调用.html" class="nav-link">
+  OpenFeign服务接口调用
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/question.html" class="nav-link">
+  question
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/seata.html" class="nav-link">
+  seata
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/security.html" class="nav-link">
+  security
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/sentinel.html" class="nav-link">
+  sentinel
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Sentinel实现熔断与限流.html" class="nav-link">
+  Sentinel实现熔断与限流
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Spring Cloud Ribbon.html" class="nav-link">
+  Spring Cloud Ribbon
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/spring-cloud-stream.html" class="nav-link">
+  spring-cloud-stream
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/stream3.2学习.html" class="nav-link">
+  stream3.2学习
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/zookeeper.html" class="nav-link">
+  zookeeper
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/配置中心.html" class="nav-link">
+  配置中心
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="JVM" class="dropdown-title"><span class="title">JVM</span> <span class="arrow down"></span></button> <button type="button" aria-label="JVM" class="mobile-dropdown-title"><span class="title">JVM</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/JVM/JAVA反射机制.html" class="nav-link">
+  JAVA反射机制
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Project" class="dropdown-title"><span class="title">Project</span> <span class="arrow down"></span></button> <button type="button" aria-label="Project" class="mobile-dropdown-title"><span class="title">Project</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/Project/clash部署至服务器，提供“上网”服务.html" class="nav-link">
+  clash部署至服务器，提供“上网”服务
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Project/Unicloud 阿里云服务器作图床.html" class="nav-link">
+  Unicloud 阿里云服务器作图床
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Project/内网穿透技术初探.html" class="nav-link">
+  内网穿透技术初探
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Project/微信订阅号开发.html" class="nav-link">
+  微信订阅号开发
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="机器视觉" class="dropdown-title"><span class="title">机器视觉</span> <span class="arrow down"></span></button> <button type="button" aria-label="机器视觉" class="mobile-dropdown-title"><span class="title">机器视觉</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/机器视觉/RTMPose.html" class="nav-link">
+  RTMPose
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="面试题" class="dropdown-title"><span class="title">面试题</span> <span class="arrow down"></span></button> <button type="button" aria-label="面试题" class="mobile-dropdown-title"><span class="title">面试题</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/面试题/Redis.html" class="nav-link">
+  Redis
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/sunwenhaopro" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://www.ctrlcver.icu" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  博客
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://photowall.ctrlcver.icu" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  PhotoWall
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="数据库" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="数据库" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/数据库/JAVA反射机制.html" class="nav-link">
+  JAVA反射机制
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Vue" class="dropdown-title"><span class="title">Vue</span> <span class="arrow down"></span></button> <button type="button" aria-label="Vue" class="mobile-dropdown-title"><span class="title">Vue</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/Vue/Vue-loading动态加载.html" class="nav-link">
+  Vue-loading动态加载
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Vue/Vue项目用axios做request封装.html" class="nav-link">
+  Vue项目用axios做request封装
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Vue/前端踩坑之路.html" class="nav-link">
+  前端踩坑之路
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringBoot" class="dropdown-title"><span class="title">SpringBoot</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringBoot" class="mobile-dropdown-title"><span class="title">SpringBoot</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/aop面向切面编程.html" class="nav-link">
+  aop面向切面编程
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Cron表达式.html" class="nav-link">
+  Cron表达式
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/issue3.html" class="nav-link">
+  issue3
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Listener监听器.html" class="nav-link">
+  Listener监听器
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Mybatis 动态SQL.html" class="nav-link">
+  Mybatis 动态SQL
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Mybatis.html" class="nav-link">
+  Mybatis
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/mybatis和spring整合.html" class="nav-link">
+  mybatis和spring整合
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Mybatis缓存机制.html" class="nav-link">
+  Mybatis缓存机制
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/session之 HttpSessionActivation.html" class="nav-link">
+  session之 HttpSessionActivation
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/springboot+vue部署后出现springboot后端部分页面404.html" class="nav-link">
+  springboot+vue部署后出现springboot后端部分页面404
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/springboot.html" class="nav-link">
+  springboot
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/SpringMVC介绍.html" class="nav-link">
+  SpringMVC介绍
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/springmvc重定向和请求转发操作.html" class="nav-link">
+  springmvc重定向和请求转发操作
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/Spring介绍.html" class="nav-link">
+  Spring介绍
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/SSM整合开发.html" class="nav-link">
+  SSM整合开发
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/url-pattern设置.html" class="nav-link">
+  url-pattern设置
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/web开发.html" class="nav-link">
+  web开发
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/yaml.html" class="nav-link">
+  yaml
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/单元测试.html" class="nav-link">
+  单元测试
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/启动原理.html" class="nav-link">
+  启动原理
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/嵌入式servlet服务器.html" class="nav-link">
+  嵌入式servlet服务器
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/异常，拦截器....html" class="nav-link">
+  异常，拦截器...
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/执行流程分析.html" class="nav-link">
+  执行流程分析
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/指标监控.html" class="nav-link">
+  指标监控
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/数据访问.html" class="nav-link">
+  数据访问
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/注意.html" class="nav-link">
+  注意
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/注解.html" class="nav-link">
+  注解
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/注解方式注入.html" class="nav-link">
+  注解方式注入
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/源码分析.html" class="nav-link">
+  源码分析
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringBoot/高级特性.html" class="nav-link">
+  高级特性
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringSecurity" class="dropdown-title"><span class="title">SpringSecurity</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringSecurity" class="mobile-dropdown-title"><span class="title">SpringSecurity</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/SpringSecurity/前后端分离Header中添加Authorization的设置.html" class="nav-link">
+  前后端分离Header中添加Authorization的设置
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringSecurity/基本解读.html" class="nav-link">
+  基本解读
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringSecurity/基本配置.html" class="nav-link">
+  基本配置
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringCloud" class="dropdown-title"><span class="title">SpringCloud</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringCloud" class="mobile-dropdown-title"><span class="title">SpringCloud</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Eureka.html" class="nav-link">
+  Eureka
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Gateway.html" class="nav-link">
+  Gateway
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Hystrix断路器.html" class="nav-link">
+  Hystrix断路器
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/nacos-config.html" class="nav-link">
+  nacos-config
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/nacos.html" class="nav-link">
+  nacos
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/nacos集群和持久化配置.html" class="nav-link">
+  nacos集群和持久化配置
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/OpenFeign ISsue.html" class="nav-link">
+  OpenFeign ISsue
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/OpenFeign-issue.html" class="nav-link">
+  OpenFeign-issue
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/OpenFeign服务接口调用.html" class="nav-link">
+  OpenFeign服务接口调用
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/question.html" class="nav-link">
+  question
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/seata.html" class="nav-link">
+  seata
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/security.html" class="nav-link">
+  security
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/sentinel.html" class="nav-link">
+  sentinel
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Sentinel实现熔断与限流.html" class="nav-link">
+  Sentinel实现熔断与限流
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/Spring Cloud Ribbon.html" class="nav-link">
+  Spring Cloud Ribbon
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/spring-cloud-stream.html" class="nav-link">
+  spring-cloud-stream
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/stream3.2学习.html" class="nav-link">
+  stream3.2学习
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/zookeeper.html" class="nav-link">
+  zookeeper
+</a></li><li class="dropdown-item"><!----> <a href="/pages/SpringCloud/配置中心.html" class="nav-link">
+  配置中心
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="JVM" class="dropdown-title"><span class="title">JVM</span> <span class="arrow down"></span></button> <button type="button" aria-label="JVM" class="mobile-dropdown-title"><span class="title">JVM</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/JVM/JAVA反射机制.html" class="nav-link">
+  JAVA反射机制
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Project" class="dropdown-title"><span class="title">Project</span> <span class="arrow down"></span></button> <button type="button" aria-label="Project" class="mobile-dropdown-title"><span class="title">Project</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/Project/clash部署至服务器，提供“上网”服务.html" class="nav-link">
+  clash部署至服务器，提供“上网”服务
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Project/Unicloud 阿里云服务器作图床.html" class="nav-link">
+  Unicloud 阿里云服务器作图床
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Project/内网穿透技术初探.html" class="nav-link">
+  内网穿透技术初探
+</a></li><li class="dropdown-item"><!----> <a href="/pages/Project/微信订阅号开发.html" class="nav-link">
+  微信订阅号开发
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="机器视觉" class="dropdown-title"><span class="title">机器视觉</span> <span class="arrow down"></span></button> <button type="button" aria-label="机器视觉" class="mobile-dropdown-title"><span class="title">机器视觉</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/机器视觉/RTMPose.html" class="nav-link">
+  RTMPose
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="面试题" class="dropdown-title"><span class="title">面试题</span> <span class="arrow down"></span></button> <button type="button" aria-label="面试题" class="mobile-dropdown-title"><span class="title">面试题</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/面试题/Redis.html" class="nav-link">
+  Redis
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/sunwenhaopro" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://www.ctrlcver.icu" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  博客
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://photowall.ctrlcver.icu" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  PhotoWall
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/pages/SpringSecurity/前后端分离Header中添加Authorization的设置.html" class="sidebar-link">SpringSecurity前后端分离Header中添加Authorization的设置以及跨域问题踩坑记录</a></li><li><a href="/pages/SpringSecurity/基本解读.html" class="active sidebar-link">UserDetails</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/pages/SpringSecurity/基本解读.html#userdetails" class="sidebar-link">UserDetails</a></li><li class="sidebar-sub-header"><a href="/pages/SpringSecurity/基本解读.html#userdetailsservice" class="sidebar-link">UserDetailsService</a></li><li class="sidebar-sub-header"><a href="/pages/SpringSecurity/基本解读.html#daoauthenticationprovider" class="sidebar-link">DaoAuthenticationProvider</a></li><li class="sidebar-sub-header"><a href="/pages/SpringSecurity/基本解读.html#执行的流程-默认配置" class="sidebar-link">执行的流程，默认配置</a></li><li class="sidebar-sub-header"><a href="/pages/SpringSecurity/基本解读.html#总结" class="sidebar-link">总结</a></li></ul></li><li><a href="/pages/SpringSecurity/基本配置.html" class="sidebar-link">配置</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="userdetails"><a href="#userdetails" class="header-anchor">#</a> UserDetails</h2> <p>用户登录时，系统会根据用户名，从存储设备查找该用户的密码及权限等，将其组装成一个UserDetails对象。并用UserDetails中的数据对用户进行认证，决定其输入的用户名/密码是否正确。</p> <p>此对象我们一般都不直接调用，而是使用<code>UserDetailsService</code>接口返回，我们可以实现此接口，然后返回一个<code>UserDetails</code></p> <blockquote><p><a href="https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/dao-authentication-provider.html#servlet-authentication-daoauthenticationprovider" target="_blank" rel="noopener noreferrer"><code>DaoAuthenticationProvider</code><span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>验证<code>UserDetails</code>，然后返回一个已配置<a href="https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html#servlet-authentication-authentication" target="_blank" rel="noopener noreferrer"><code>Authentication</code><span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>的主体的主体。<code>UserDetails UserDetailsService</code></p></blockquote> <p>此接口中的方法，任何一个返回<code>false</code>都会导致认证失败</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">UserDetails</span> <span class="token keyword">extends</span> <span class="token class-name">Serializable</span> <span class="token punctuation">{</span>
+	<span class="token class-name">Collection</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">GrantedAuthority</span><span class="token punctuation">&gt;</span></span> <span class="token function">getAuthorities</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//权限 </span>
+	<span class="token class-name">String</span> <span class="token function">getPassword</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">//密码</span>
+	<span class="token class-name">String</span> <span class="token function">getUsername</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">//用户名</span>
+ 
+	<span class="token keyword">boolean</span> <span class="token function">isAccountNonExpired</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//账号是否未过期</span>
+	<span class="token keyword">boolean</span> <span class="token function">isAccountNonLocked</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">//账号是否未锁定</span>
+	<span class="token keyword">boolean</span> <span class="token function">isCredentialsNonExpired</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//密码是否未过期</span>
+	<span class="token keyword">boolean</span> <span class="token function">isEnabled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment">//是否激活</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>例如</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token annotation punctuation">@Service</span><span class="token punctuation">(</span><span class="token string">&quot;userDetailsService&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">LoginService</span> <span class="token keyword">implements</span> <span class="token class-name">UserDetailsService</span> <span class="token punctuation">{</span>
+
+  <span class="token annotation punctuation">@Autowired</span>
+  <span class="token keyword">private</span> <span class="token class-name">UserMapper</span> userMapper<span class="token punctuation">;</span>
+
+  <span class="token annotation punctuation">@Override</span>
+  <span class="token keyword">public</span> <span class="token class-name">UserDetails</span> <span class="token function">loadUserByUsername</span><span class="token punctuation">(</span><span class="token class-name">String</span> username<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">UsernameNotFoundException</span> <span class="token punctuation">{</span>
+    <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Users</span><span class="token punctuation">&gt;</span></span> wrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    wrapper<span class="token punctuation">.</span><span class="token function">eq</span><span class="token punctuation">(</span><span class="token string">&quot;username&quot;</span><span class="token punctuation">,</span>username<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token class-name">Users</span> user <span class="token operator">=</span> userMapper<span class="token punctuation">.</span><span class="token function">selectOne</span><span class="token punctuation">(</span>wrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>user <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">//数据库中，没有该条记录，认证失败</span>
+      <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">UsernameNotFoundException</span><span class="token punctuation">(</span><span class="token string">&quot;用户不存在&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">GrantedAuthority</span><span class="token punctuation">&gt;</span></span> grantedAuthorities <span class="token operator">=</span>
+      <span class="token class-name">AuthorityUtils</span><span class="token punctuation">.</span><span class="token function">commaSeparatedStringToAuthorityList</span><span class="token punctuation">(</span>user<span class="token punctuation">.</span><span class="token function">getRole</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">User</span><span class="token punctuation">(</span>user<span class="token punctuation">.</span><span class="token function">getUsername</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token keyword">new</span> <span class="token class-name">BCryptPasswordEncoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">encode</span><span class="token punctuation">(</span>user<span class="token punctuation">.</span><span class="token function">getPassword</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>grantedAuthorities<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br></div></div><h2 id="userdetailsservice"><a href="#userdetailsservice" class="header-anchor">#</a> UserDetailsService</h2> <p>Spring Security中进行身份验证的是AuthenticationManager接口，ProviderManager是它的一个默认实现，但它并不用来处理身份认证，而是委托给配置好的AuthenticationProvider，每个AuthenticationProvider会轮流检查身份认证。检查后或者返回Authentication对象或者抛出异常。</p> <p>验证身份就是加载响应的UserDetails，看看是否和用户输入的账号、密码、权限等信息匹配。此步骤由实现AuthenticationProvider的DaoAuthenticationProvider（它利用UserDetailsService验证用户名、密码和授权）处理。包含 GrantedAuthority 的 UserDetails对象在构建 Authentication对象时填入数据。</p> <p>Spring Security 提供<a href="https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/in-memory.html#servlet-authentication-inmemory" target="_blank" rel="noopener noreferrer">内存<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>和<a href="https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/jdbc.html#servlet-authentication-jdbc" target="_blank" rel="noopener noreferrer">JDBC<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>实现<code>UserDetailsService</code>。</p> <blockquote><div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token class-name">UserDetails</span> loadedUser <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getUserDetailsService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">loadUserByUsername</span><span class="token punctuation">(</span>username<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div></blockquote> <h2 id="daoauthenticationprovider"><a href="#daoauthenticationprovider" class="header-anchor">#</a> DaoAuthenticationProvider</h2> <p><code>DaoAuthenticationProvider</code>是<code>AuthenticationProvider</code>接口的一个实现类，<code>DaoAuthenticationProvider</code>根据<code>UserDetailsService</code>和<code>PasswordEncoder</code>来验证用户名和密码</p> <p>他执行的流程图如下</p> <p><img src="https://picture.xcye.xyz/image-20220311105937998.png" alt=""></p> <p>步骤如下</p> <ol><li><p>认证过滤器读取到用户名和密码，然后将用户名和密码传递给<code>UsernamePasswordAuthenticationToken</code></p> <p>``ProviderManager<code>是</code>AuthenticationManager`的一个实现类</p></li> <li><p>然后<code>ProviderManager</code>是被配置用来使用<code>AuthenticationProvider</code>，因为我们要使用<code>DaoAuthenticationProvider</code>，<code>DaoAuthenticationProvider</code>是<code>AuthenticationProvider</code>的一个实现类</p> <blockquote><p>所以如果有一个<code>AuthenticationProvider</code>对象，那么也就有了<code>DaoAuthenticationProvider</code>对象</p></blockquote></li> <li><p><code>DaoAuthenticationProvider</code> 会从 <code>UserDetailsService</code>中寻找<code>UserDetails</code></p> <blockquote><p><code>UserDetails</code>存储了用户的信息</p></blockquote></li> <li><p><code>DaoAuthenticationProvider</code> 然后会使用 <a href="https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/password-encoder.html#servlet-authentication-password-storage" target="_blank" rel="noopener noreferrer"><code>PasswordEncoder</code><span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 来验证用户名和密码，用户名和密码信息是从第三步中返回回来的<code>UserDetails</code>对象中获取到的</p></li> <li><p>当身份信息验证成功后，<a href="https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html#servlet-authentication-authentication" target="_blank" rel="noopener noreferrer"><code>Authentication</code><span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>会返回<code>UsernamePasswordAuthenticationToken</code>，并且将存在<code>UserDetails</code>的<code>UserDetailsService</code>对象返回。</p></li></ol> <h2 id="执行的流程-默认配置"><a href="#执行的流程-默认配置" class="header-anchor">#</a> 执行的流程，默认配置</h2> <h3 id="usernamepasswordauthenticationfilter过滤器"><a href="#usernamepasswordauthenticationfilter过滤器" class="header-anchor">#</a> UsernamePasswordAuthenticationFilter过滤器</h3> <ol><li>浏览器发送请求，需要登录，输入错误用户名aurora和错误密码</li> <li><code>UsernamePasswordAuthenticationFilter</code>过滤器中的<code>attemptAuthentication()</code>方法执行</li></ol> <h4 id="attemptauthentication"><a href="#attemptauthentication" class="header-anchor">#</a> attemptAuthentication()</h4> <ol><li><p>判断请求的方法，如果不是<code>post</code>，那么抛出异常</p></li> <li><p>通过从<code>request</code>对象中，获取到用户名和密码</p></li> <li><p>根据获取到的用户名和密码，创建<code>UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password)</code>对象</p> <blockquote><p>在构建这个对象的过程中，会对<code>authenticated</code>赋值为false，也就是此用户还没有认证</p></blockquote></li> <li><p>此方法执行完，会根据<code>UsernamePasswordAuthenticationToken</code>对象实例化一个<code>Authentication</code>对象</p></li></ol> <h3 id="abstractuserdetailsauthenticationprovider"><a href="#abstractuserdetailsauthenticationprovider" class="header-anchor">#</a> AbstractUserDetailsAuthenticationProvider</h3> <p>然后程序便会进入到<code>AbstractUserDetailsAuthenticationProvider</code>抽象类中的<code>authenticate(Authentication authentication)</code>方法执行，此抽象类是<code>DaoAuthenticationProvider</code>类的父类</p> <p>当执行到下面这段代码的时候，便会跳到<code>DaoAuthenticationProvider</code>中去执行</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">try</span> <span class="token punctuation">{</span>
+    user <span class="token operator">=</span> <span class="token function">retrieveUser</span><span class="token punctuation">(</span>username<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token class-name">UsernamePasswordAuthenticationToken</span><span class="token punctuation">)</span> authentication<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><blockquote><p>因为在<code>AbstractUserDetailsAuthenticationProvider</code>类中，<code>retrieveUser()</code>是一个抽象方法，<code>DaoAuthenticationProvider</code>是此抽象类的子类，所以就会跳到<code>DaoAuthenticationProvider</code>中</p></blockquote> <h3 id="daoauthenticationprovider-2"><a href="#daoauthenticationprovider-2" class="header-anchor">#</a> DaoAuthenticationProvider</h3> <p>执行完上面的方法，程序便跳到<code>DaoAuthenticationProvider</code>类中，执行<code>retrieveUser(String username, UsernamePasswordAuthenticationToken authentication)</code>方法</p> <ol><li><p>执行<code>UserDetailsService</code>类中的<code>loadUserByUsername(username)</code>方法，此方法返回的是一个<code>UserDetails</code>对象</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token class-name">UserDetails</span> loadedUser <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getUserDetailsService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">loadUserByUsername</span><span class="token punctuation">(</span>username<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><blockquote><p>此<code>loadedUser</code>对象中，存放的是正确的用户名和密码</p></blockquote> <p>因为这里输入的是一个错误用户名和错误密码，所以执行抛出一个<code>UsernameNotFoundException</code>异常</p> <p>如果此用户存在的话，那么就会通过<code>User</code>类，根据用户名，密码等实例化<code>UserDetails</code>对象</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">User</span><span class="token punctuation">(</span>user<span class="token punctuation">.</span><span class="token function">getUsername</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> user<span class="token punctuation">.</span><span class="token function">getPassword</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> user<span class="token punctuation">.</span><span class="token function">isEnabled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> user<span class="token punctuation">.</span><span class="token function">isAccountNonExpired</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                user<span class="token punctuation">.</span><span class="token function">isCredentialsNonExpired</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> user<span class="token punctuation">.</span><span class="token function">isAccountNonLocked</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> user<span class="token punctuation">.</span><span class="token function">getAuthorities</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>如果用户不存在，那么就<a href="#%E7%94%A8%E6%88%B7%E4%B8%8D%E5%AD%98%E5%9C%A8">跳到</a></p></li> <li><p>如果用户名是正确的，那么程序会继续<a href="#%E7%BB%A7%E7%BB%AD">执行</a></p></li></ol> <h4 id="用户不存在"><a href="#用户不存在" class="header-anchor">#</a> 用户不存在</h4> <ol><li>会跳到<code>AbstractAuthenticationProcessingFilter</code>类中的<code>doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)</code>方法，在此方法中，会抛出一个异常，然后执行<code>unsuccessfulAuthentication(request, response, ex);</code>方法</li> <li>然后跳到<code>LogoutFilter</code>类中的<code>doFilter(xxx)</code></li> <li>然后后续还有一个过滤器需要执行</li></ol> <h3 id="继续"><a href="#继续" class="header-anchor">#</a> 继续</h3> <p>这一步还是在<code>AbstractUserDetailsAuthenticationProvider</code>类中的<code>authenticate(Authentication authentication)</code>方法中执行</p> <p>通过<code>AbstractUserDetailsAuthenticationProvider</code>的子类<code>DefaultPreAuthenticationChecks</code>执行<code>retrieveUser()</code>方法获取大到正确的用户名和密码对象后</p> <p>然后会跳到<code>DefaultPreAuthenticationChecks</code>类中的<code>check(UserDetails user)</code>方法，检查用户是否被锁着，被锁住的的用户无法被验证</p> <blockquote><div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">//对应执行下面代码</span>
+<span class="token keyword">try</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>preAuthenticationChecks<span class="token punctuation">.</span><span class="token function">check</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">additionalAuthenticationChecks</span><span class="token punctuation">(</span>user<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token class-name">UsernamePasswordAuthenticationToken</span><span class="token punctuation">)</span> authentication<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div></blockquote> <p>在这个方法中，会依次调用<code>UserDetails</code>中的</p> <blockquote><p>isAccountNonLocked(),isEnabled(),isAccountNonExpired()</p></blockquote> <p>三个方法，如果里面的值为false，那么都将抛出对应的异常</p> <p>当执行完<code>this.preAuthenticationChecks.check(user);</code>之后，便会执行<code>additionalAuthenticationChecks(user, (UsernamePasswordAuthenticationToken) authentication);</code>，验证用户传入的密码是否正确</p> <p>其中user是存放正确的用户名和密码的<code>UserDetails</code>对象，而<code>(UsernamePasswordAuthenticationToken) authentication)</code>是用户当前输入的<code>UserDetails</code>对象</p> <p>对密码进行检查，调用的是<code>PasswordEncoder</code>对象中的<code>matches()</code>方法，如果密码不正确，那么就会抛出异常，然后后面的过程，也基本上和用户名错误差不多</p> <p>如果此步密码正确，那么请<a href="#%E7%94%A8%E6%88%B7%E5%90%8D%E5%92%8C%E5%AF%86%E7%A0%81%E9%83%BD%E6%AD%A3%E7%A1%AE">跳到</a></p> <h3 id="用户名和密码都正确"><a href="#用户名和密码都正确" class="header-anchor">#</a> 用户名和密码都正确</h3> <ol><li><p>执行<code>this.postAuthenticationChecks.check(user);</code>判断用户的密码凭证是否过期，最终也就是调用<code>UserDetails</code>对象中的<code>isCredentialsNonExpired()</code>方法，进行判断</p> <p>如果已经过期，就会抛出异常</p></li> <li><p>然后就会通过执行<code>createSuccessAuthentication(principalToReturn, authentication, user);</code>返回一个已经验证成功的<code>Authentication</code>对象，此<code>Authentication</code>对象最终是使用<code>UsernamePasswordAuthenticationToken</code>类创建的</p></li></ol> <p>中间还有其他的一些过程，就省略了，最后会在<code>AbstractAuthenticationProcessingFilter</code>类中的<code>doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)</code>方法中，调用<code>successfulAuthentication(request, response, chain, authenticationResult);</code>方法</p> <h2 id="总结"><a href="#总结" class="header-anchor">#</a> 总结</h2> <h3 id="userdetailsservice-userdetails"><a href="#userdetailsservice-userdetails" class="header-anchor">#</a> UserDetailsService UserDetails</h3> <p><img src="https://picture.xcye.xyz/image-20220311191851697.png" alt=""></p> <p>通过上面的源码分析之后，我们发现，通过<code>UserDetailsService</code>对象获取<code>UserDetails</code>对象，是发生在<code>DaoAuthenticationProvider</code>类中的处<code>UserDetails loadedUser = this.getUserDetailsService().loadUserByUsername(username);</code>这段代码中的</p> <p>如果当前应用中，我们自己创建一个类实现<code>UserDetailsService</code>接口，并将其使用<code>@Component</code>注解添加到容器中的话，那么此处的<code>this.getUserDetailsService()</code>对象就是我们自己实现的这个<code>UserDetailsService</code>对象</p> <p>而且我们也可以自己写一个类，实现<code>UserDetails</code>接口，然后在我们自己的<code>UserDetailsService</code>实现类中，将此<code>UserDetails</code>实现类<code>return</code>就行了</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">UserDetails</span> <span class="token keyword">extends</span> <span class="token class-name">Serializable</span> <span class="token punctuation">{</span>
+  <span class="token class-name">Collection</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">GrantedAuthority</span><span class="token punctuation">&gt;</span></span> <span class="token function">getAuthorities</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//权限 </span>
+  <span class="token class-name">String</span> <span class="token function">getPassword</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">//密码</span>
+  <span class="token class-name">String</span> <span class="token function">getUsername</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">//用户名</span>
+
+  <span class="token keyword">boolean</span> <span class="token function">isAccountNonExpired</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//账号是否未过期</span>
+  <span class="token keyword">boolean</span> <span class="token function">isAccountNonLocked</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">//账号是否未锁定</span>
+  <span class="token keyword">boolean</span> <span class="token function">isCredentialsNonExpired</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//密码是否未过期</span>
+  <span class="token keyword">boolean</span> <span class="token function">isEnabled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment">//是否激活</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p><code>UserDetails</code>中的方法逻辑，我们想怎么写，就怎么写</p> <blockquote><p>而且值得注意的是，<code>DaoAuthenticationProvider</code>类中的一些方法，比如setUserDetailsService()，setPasswordEncoder()在程序启动的时候，便会执行</p></blockquote> <h3 id="passwordencoder"><a href="#passwordencoder" class="header-anchor">#</a> PasswordEncoder</h3> <p>我们也可以自己实现<code>PasswordEncoder</code></p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyPasswordEncoder</span> <span class="token keyword">implements</span> <span class="token class-name">PasswordEncoder</span> <span class="token punctuation">{</span>
+
+  <span class="token annotation punctuation">@Override</span>
+  <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">encode</span><span class="token punctuation">(</span><span class="token class-name">CharSequence</span> rawPassword<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;zhixing&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token annotation punctuation">@Override</span>
+  <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">matches</span><span class="token punctuation">(</span><span class="token class-name">CharSequence</span> rawPassword<span class="token punctuation">,</span> <span class="token class-name">String</span> encodedPassword<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;qipei&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p>自定义我们自己的密码匹配和密码编码逻辑</p> <p>但是spring security中，已经写好了一些实现类，我们直接使用<code>@Bean</code>配置一下就行</p> <p><img src="https://picture.xcye.xyz/image-20220311191701772.png" alt=""></p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token annotation punctuation">@Bean</span>
+<span class="token class-name">PasswordEncoder</span> <span class="token function">password</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">BCryptPasswordEncoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><blockquote><p>在进行密码比对的时候，一定要保证数据库中，或者是UserDetailsService返回的对象中的密码是通过PasswordEncoder类中的encode()方法返回的字符串，否则验证不会通过</p> <p><code>matches(CharSequence rawPassword, String encodedPassword)</code>方法的第一个参数是用户输入的密码字符串，没有经过任何处理，而第二个是经过<code>encode()</code>方法处理后的字符串，不能看到</p> <p>而且我们也不能将经过<code>encode()</code>处理后的密码，解析成明文</p></blockquote></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/pages/SpringSecurity/前后端分离Header中添加Authorization的设置.html" class="prev">
+        SpringSecurity前后端分离Header中添加Authorization的设置以及跨域问题踩坑记录
+      </a></span> <span class="next"><a href="/pages/SpringSecurity/基本配置.html">
+        配置
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.090a2d6d.js" defer></script><script src="/assets/js/2.cf1cc9d0.js" defer></script><script src="/assets/js/64.5fa3e033.js" defer></script>
+  </body>
+</html>
